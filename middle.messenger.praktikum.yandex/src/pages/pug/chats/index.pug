@@ -1,0 +1,18 @@
+block content 
+  link(rel="stylesheet", href="/src/pages/pug/chats/styles.less")
+  include ../../../components/chat-preview/index.pug
+  include ../../../components/chat/index.pug
+
+  #content.content
+    .sidebar
+      .sidebar-top 
+        img(src="/add.svg" alt='')
+        a(href="/src/pages/profile.html") Профиль &gt;
+      .search
+        input(type="text" placeholder="Поиск")
+      .chat-list
+        .chat
+        each chats in [{id: 'one', icon: '', name: 'Андрей', lastMessage: 'Изображение'}, {id: 'two', icon: '', name: 'Киноклуб', lastMessage: 'Тут очень интересный текст, который непременно нужно прочитать'}]
+          +chatPreview(chats.id, chats.icon, chats.name, chats.lastMessage)
+    +chat('')
+      

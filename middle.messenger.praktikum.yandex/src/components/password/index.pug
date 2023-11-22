@@ -1,0 +1,9 @@
+mixin password(id, placeholder)
+
+  block head 
+    link(rel="stylesheet", href="/src/components/password/styles.less")
+  block content
+    .password
+      input(id=id type="password", placeholder=placeholder)
+      button.password-control(type="button" data-target=`#${id}`)
+        img#eye(src='/visibility.svg' alt='') 

@@ -1,0 +1,32 @@
+block content
+  link(rel="stylesheet", href="/src/pages/pug/login/styles.less")
+  include ../../../components/password/index.pug
+
+  #container.container
+    .form-container.sign-up
+      form
+        h1 Регистрация
+        input(type="email", placeholder="Почта")
+        input(type="text", placeholder="Логин")
+        input(type="text", placeholder="Имя")
+        input(type="text", placeholder="Фамилия")
+        input(type="tel", placeholder="Телефон")
+        +password('sign-up-first-password','Пароль')
+        +password('sign-up-second-password','Пароль (еще раз)')
+        a(href="/src/pages/chats.html")
+          button.confirm(type="button") Зарегистрироваться
+    .form-container.sign-in
+      form
+        h1 Вход
+        input(type="text", placeholder="Логин")
+        +password('sign-in-password','Пароль')
+        a(href="/src/pages/chats.html")
+          button.confirm(type="button") Авторизоваться
+    .toggle-container
+      .toggle
+        #login.toggle-panel.toggle-left
+          h1 Вход
+        #register.toggle-panel.toggle-right
+          h1 Нет аккаунта?
+  script(src="pug/login/script.ts")
+  script(src="../components/password/index.ts")
