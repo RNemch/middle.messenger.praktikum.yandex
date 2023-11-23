@@ -1,7 +1,4 @@
-@primary-color: #2989e5;
-@background-color: rgba(255, 255, 255, 0.7);
-@gradient-start: #298ae594;
-@gradient-end: #236db3;
+@import "/styles.less";
 
 .content {
   display: flex;
@@ -28,7 +25,7 @@
     }
 
     img {
-      background-color: @background-color;
+      background-color: @background-color-chats;
       fill: @primary-color;
       border-radius: 20px;
       margin-left: 5px;
@@ -43,7 +40,7 @@
 
     input {
       width: 90%;
-      background-color: @background-color;
+      background-color: @background-color-chats;
       border: 1px solid @primary-color;
       margin: 8px 0;
       padding: 10px 15px;

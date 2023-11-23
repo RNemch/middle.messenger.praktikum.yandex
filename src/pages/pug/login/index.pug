@@ -12,15 +12,13 @@ block content
         input(type="tel", placeholder="Телефон", name="phone")
         +password('sign-up-first-password','Пароль', "password")
         +password('sign-up-second-password','Пароль (еще раз)', "password")
-        a(href="/src/pages/chats.html")
-          button.confirm(type="button") Зарегистрироваться
+        button.confirm(type="submit") Зарегистрироваться
     .form-container.sign-in
       form
         h1 Вход
         input(type="text", placeholder="Логин", name="login")
         +password('sign-in-password','Пароль', "password")
-        a(href="/src/pages/chats.html")
-          button.confirm(type="button") Авторизоваться
+        button.confirm(type="submit") Авторизоваться
     .toggle-container
       .toggle
         #login.toggle-panel.toggle-left
