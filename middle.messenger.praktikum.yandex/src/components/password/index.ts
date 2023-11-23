@@ -9,10 +9,10 @@ btnPass.forEach(function (btn: HTMLElement) {
       let iconEye = context.querySelector('img');
       if (inputPass?.getAttribute('type') === 'password') {
         inputPass.setAttribute('type', 'text');
-        iconEye?.setAttribute('src', '/visibility_off.svg');
+        iconEye?.setAttribute('src', '/image/visibility_off.svg');
       } else {
         inputPass?.setAttribute('type', 'password');
-        iconEye?.setAttribute('src', '/visibility.svg');
+        iconEye?.setAttribute('src', '/image/visibility.svg');
       }
     }
   };

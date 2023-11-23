@@ -1,41 +1,47 @@
-- 
+-
   let info = [{
     label: "Почта",
     text: "Test123@yandex.ru",
-    type: "email"
+    type: "email",
+    name: "email",
   },{
     label: "Логин",
     text: "Test123",
-    type: "text"
+    type: "text",
+    name: "login"
   },{
     label: "Имя",
     text: "Иван",
-    type: "text"
+    type: "text",
+    name: "first_name"
   },{
     label: "Фамилия",
     text: "Сидоров",
-    type: "text"
+    type: "text",
+    name: "second_nama"
   },{
     label: "Имя в чате",
     text: "Иван Сидоров",
-    type: "text"
+    type: "text",
+    name: "display_name"
   },{
     label: "Телефон",
     text: "+7 (999) 123-45-67",
-    type: "tel"
+    type: "tel",
+    name: "phone"
   }]
 
-block content 
+block content
   link(rel="stylesheet", href="/src/pages/pug/profile/styles.less")
   include ../../../components/info/index.pug
   include ../../../components/password/index.pug
 
-  #content.content 
-    .sidebar 
+  #content.content
+    .sidebar
       a(href="/src/pages/chats.html") &lt; Чаты
     .profile
       .profile-icon
-        img(src="/camera.svg")
+        img(src="/image/camera.svg")
         .load
           span Загрузить
       h1 Иван Сидоров
@@ -43,23 +49,27 @@ block content
         .profile-info-list
           each data in info
             +info(data.label, data.text)
-        .profile-buttons 
-          button.profile-btn#change-data(type="bytton") Изменить данные
-          button.profile-btn#change-password(type="bytton") Изменить пароль
+        .profile-buttons
+          button#change-data.profile-btn(type="bytton") Изменить данные
+          button#change-password.profile-btn(type="bytton") Изменить пароль
           a(href="/src/pages/login.html")
-            button.profile-btn#exit.red(type="bytton") Выйти
+            button#exit.profile-btn.red(type="bytton") Выйти
 
       .profile-change-data
         each data in info
-          input(type=data.type, placeholder=data.label value=data.text)
-        button.profile-btn#save(type="button") Сохранить
-        
+          input(
+            type=data.type,
+            placeholder=data.label,
+            value=data.text,
+            name=data.name
+          )
+        button#save.profile-btn(type="button") Сохранить
+
       .profile-change-password
-        +password("old-password", "Старый пароль")
-        +password("new-first-password", "Новый пароль")
-        +password("new-second-password", "Новый пароль (еще раз)")
-        button.profile-btn#save(type="button") Сохранить
-        
+        +password("old-password", "Старый пароль", "oldPassword")
+        +password("new-first-password", "Новый пароль", "newPassword")
+        +password("new-second-password", "Новый пароль (еще раз)", "newPassword")
+        button#save.profile-btn(type="button") Сохранить
 
 script(src="pug/profile/script.ts")
 script(src="../components/password/index.ts")

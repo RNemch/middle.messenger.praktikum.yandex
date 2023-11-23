@@ -1,11 +1,9 @@
 mixin chat(messages)
-
-  block content 
+  block content
     link(rel="stylesheet", href="/src/components/chat/styles.less")
 
-    if !messages 
+    if !messages
       .no-messages
         p Выберите чат чтобы отправить сообщение
-    else 
-      .chat 
-      
+    else
+      .chat

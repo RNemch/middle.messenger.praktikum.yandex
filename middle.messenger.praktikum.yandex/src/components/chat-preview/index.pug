@@ -1,15 +1,13 @@
 mixin chatPreview(id, icon, name, lastMessage)
-
   block content
     link(rel="stylesheet", href="/src/components/chat-preview/styles.less")
 
     .chat-preview-container(id=id)
       .chat-icon
-        if icon 
+        if icon
           img(src=icon)
-        else 
-          p #{name}
-      .chat-info 
-        h1 #{name}
-        p #{lastMessage}
-        
+        else
+          p #{ name }
+      .chat-info
+        h1 #{ name }
+        p #{ lastMessage }

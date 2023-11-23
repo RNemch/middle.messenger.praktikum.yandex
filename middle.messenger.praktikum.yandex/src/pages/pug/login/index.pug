@@ -6,20 +6,20 @@ block content
     .form-container.sign-up
       form
         h1 Регистрация
-        input(type="email", placeholder="Почта")
-        input(type="text", placeholder="Логин")
-        input(type="text", placeholder="Имя")
-        input(type="text", placeholder="Фамилия")
-        input(type="tel", placeholder="Телефон")
-        +password('sign-up-first-password','Пароль')
-        +password('sign-up-second-password','Пароль (еще раз)')
+        input(type="email", placeholder="Почта", name="email")
+        input(type="text", placeholder="Логин", name="login")
+        input(type="text", placeholder="Имя", name="first_name")
+        input(type="text", placeholder="Фамилия", name="second_name")
+        input(type="tel", placeholder="Телефон", name="phone")
+        +password('sign-up-first-password','Пароль', "password")
+        +password('sign-up-second-password','Пароль (еще раз)', "password")
         a(href="/src/pages/chats.html")
           button.confirm(type="button") Зарегистрироваться
     .form-container.sign-in
       form
         h1 Вход
-        input(type="text", placeholder="Логин")
-        +password('sign-in-password','Пароль')
+        input(type="text", placeholder="Логин", name="login")
+        +password('sign-in-password','Пароль', "password")
         a(href="/src/pages/chats.html")
           button.confirm(type="button") Авторизоваться
     .toggle-container
