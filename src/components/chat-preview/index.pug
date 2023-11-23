@@ -3,7 +3,7 @@ mixin chatPreview(id, icon, name, lastMessage)
     .chat-preview-container(id=id)
       .chat-icon
         if icon
-          img(src=icon)
+          img(src=icon, alt=name)
         else
           p #{ name }
       .chat-info
