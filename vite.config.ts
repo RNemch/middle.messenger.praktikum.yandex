@@ -1,10 +1,9 @@
 import { defineConfig } from 'vite';
-import pugPlugin from 'vite-plugin-pug';
-
-const { resolve } = require('path');
+import { resolve } from 'path';
+import vitePluginPugPrecompile from './vite-plugin-pug-precompile';
 
 export default defineConfig({
-  plugins: [pugPlugin()],
+  plugins: [vitePluginPugPrecompile()],
 
   css: {
     preprocessorOptions: {
@@ -16,16 +15,10 @@ export default defineConfig({
     },
   },
 
+  root: resolve(__dirname, 'src'),
+
   build: {
-    rollupOptions: {
-      input: {
-        main: resolve(__dirname, 'index.html'),
-        login: resolve(__dirname, 'src/pages/login.html'),
-        chats: resolve(__dirname, 'src/pages/chats.html'),
-        profile: resolve(__dirname, 'src/pages/profile.html'),
-        page404: resolve(__dirname, 'src/pages/404.html'),
-        page500: resolve(__dirname, 'src/pages/500.html'),
-      },
-    },
+    outDir: resolve(__dirname, 'dist'),
   },
+  publicDir: resolve(__dirname, 'public'),
 });

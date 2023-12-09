@@ -1,7 +1,4 @@
-mixin chat(messages)
-  block content
-    if !messages
-      .no-messages
-        p Выберите чат чтобы отправить сообщение
-    else
-      .chat
+if !messages
+  p Выберите чат чтобы отправить сообщение
+else
+  .chat

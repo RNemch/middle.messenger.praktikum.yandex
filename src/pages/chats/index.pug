@@ -1,0 +1,13 @@
+block content
+  #content.content
+    .sidebar
+      .sidebar-top
+        img(src="/image/add.svg", alt="add")
+        !=profileButton
+      .search
+        !=search
+      .chat-list
+        .chat
+        each chat in chats
+          != chat
+    !=chat
