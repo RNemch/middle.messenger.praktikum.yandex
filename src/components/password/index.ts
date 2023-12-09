@@ -1,5 +1,6 @@
 import Block from '../../utils/block';
 import { Eye } from '../eye-button';
+import { Input } from '../input';
 import template from './index.pug';
 
 interface PasswordProps {
@@ -27,13 +28,13 @@ export class Password extends Block {
     this.children.eye = new Eye({
       icon: 'visibility',
       onClick: () => {
-        if (!Array.isArray(this.children.eye)) {
+        if (!Array.isArray(this.children.eye) && !Array.isArray(this.children.input)) {
           // @ts-ignore
           if (this.children.eye.props.icon === 'visibility') {
             this.children.eye.setProps({
               icon: 'visibility_off',
             });
-            this.setProps({
+            this.children.input.setProps({
               type: 'text',
               value: this.getContent()?.querySelector('input')?.value,
             });
@@ -41,13 +42,20 @@ export class Password extends Block {
             this.children.eye.setProps({
               icon: 'visibility',
             });
-            this.setProps({
+            this.children.input.setProps({
               type: 'password',
               value: this.getContent()?.querySelector('input')?.value,
             });
           }
         }
       },
+    });
+
+    this.children.input = new Input({
+      type: this.props.type,
+      name: this.props.name,
+      placeholder: this.props.placeholder,
+      value: this.props.value,
     });
   }
 

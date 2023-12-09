@@ -6,9 +6,6 @@ interface ChatPreviewProps {
   icon: string;
   name: string;
   lastMessage: string;
-  //   events?: {
-  //     blur: () => void;
-  //   };
 }
 
 export class ChatPreview extends Block {
@@ -17,9 +14,6 @@ export class ChatPreview extends Block {
       { tagName: 'div', className: 'input' },
       {
         ...props,
-        //   events: {
-        //     click: props.onBlur,
-        //   },
       }
     );
   }

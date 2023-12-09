@@ -1,4 +1,5 @@
 import Block from '../../utils/block';
+import { validation } from '../../utils/validation';
 import { Button } from '../button';
 import { Input } from '../input';
 import { Password } from '../password';
@@ -26,7 +27,6 @@ export class Form extends Block {
       { tagName: 'form' },
       {
         ...props,
-        button: {},
       }
     );
   }
@@ -37,17 +37,21 @@ export class Form extends Block {
       onClick: (event: any) => {
         event.preventDefault();
         const data: DataForm = {};
+        let isSuccess = true;
         this.getContent()
-          ?.querySelectorAll('div')
+          ?.querySelectorAll('div.input')
           .forEach((el) => {
+            isSuccess = validation(el).verify;
+
             const input = el.querySelector('input');
-            if (input) {
-              data[`${input.name}`] = input.value;
-            }
+            data[`${input!.name}`] = input!.value;
           });
-        console.log(data);
-        if (this.props.buttonProps.callback) {
-          this.props.buttonProps.callback();
+
+        if (isSuccess) {
+          console.log(data);
+          if (this.props.buttonProps.callback) {
+            this.props.buttonProps.callback();
+          }
         }
       },
     });

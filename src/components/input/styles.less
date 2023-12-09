@@ -12,8 +12,23 @@
     outline: none;
   }
   span.error {
+    height: 0px;
     font-size: 8px;
     color: #f00;
-    top: -3px;
+    margin-bottom: 4px;
+  }
+
+  &.error {
+    input {
+      border-color: #f00;
+      margin-bottom: 2px;
+    }
+    span.error {
+      height: 3px;
+      font-size: 8px;
+      color: #f00;
+      margin-bottom: 4px;
+      padding-left: 15px;
+    }
   }
 }

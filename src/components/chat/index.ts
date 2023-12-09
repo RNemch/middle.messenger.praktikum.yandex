@@ -3,9 +3,6 @@ import template from './index.pug';
 
 interface ChatProps {
   messages?: string[];
-  //   events?: {
-  //     blur: () => void;
-  //   };
 }
 
 export class Chat extends Block {
@@ -14,9 +11,6 @@ export class Chat extends Block {
       { tagName: 'div', className: 'no-messages' },
       {
         ...props,
-        //   events: {
-        //     click: props.onBlur,
-        //   },
       }
     );
   }

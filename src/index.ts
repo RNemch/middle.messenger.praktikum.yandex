@@ -8,5 +8,5 @@ import { render } from './utils/render';
 // registerComponent('Card', Card);
 
 window.addEventListener('DOMContentLoaded', () => {
-  render('login');
+  render('profile');
 });

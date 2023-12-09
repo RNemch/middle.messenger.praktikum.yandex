@@ -15,7 +15,10 @@ class Block {
   public children: Record<string, Block | Block[]>;
   private eventBus: () => EventBus;
   private _element: HTMLElement | null = null;
-  private _meta: { props: any; container: { tagName: string; className?: string } };
+  private _meta: {
+    props: any;
+    container: { tagName: string; className?: string };
+  };
 
   /** JSDoc
    * @param {Object} container
@@ -207,7 +210,6 @@ class Block {
   }
 
   _createDocumentElement(container: { tagName: string; className?: string }) {
-    // Можно сделать метод, который через фрагменты в цикле создаёт сразу несколько блоков
     const elem = document.createElement(container.tagName);
     container.className && elem.classList.add(container.className);
     return elem;
