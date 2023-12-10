@@ -1,5 +1,10 @@
 {
-  "include": ["src", "vite-plugin-pug-precompile.ts", "vite.config.ts"],
+  "include": [
+    "src",
+    "vite-plugin-pug-precompile.ts",
+    "vite.config.ts",
+    "server.ts"
+  ],
   "compilerOptions": {
     "strict": true,
     "noImplicitAny": true,
