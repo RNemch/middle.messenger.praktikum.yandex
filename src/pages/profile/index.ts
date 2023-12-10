@@ -37,7 +37,7 @@ export class ProfilePage extends Block {
       (el) =>
         new Info({
           label: el.label,
-          text: el.text,
+          text: el.value,
         }),
     );
 
