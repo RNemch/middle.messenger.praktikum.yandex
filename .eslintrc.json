@@ -10,6 +10,7 @@
     "no-undef": "off",
     "@typescript-eslint/no-unused-vars": "off",
     "@typescript-eslint/default-param-last": "off",
+    "@typescript-eslint/ban-ts-comment": "error",
     "import/prefer-default-export": "off",
     "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
     "react/jsx-filename-extension": [0],

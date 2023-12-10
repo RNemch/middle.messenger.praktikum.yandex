@@ -28,9 +28,16 @@ export class Password extends Block {
     this.children.eye = new Eye({
       icon: 'visibility',
       onClick: () => {
-        if (!Array.isArray(this.children.eye) && !Array.isArray(this.children.input)) {
-          // @ts-ignore
-          if (this.children.eye.props.icon === 'visibility') {
+        if (
+          !Array.isArray(this.children.eye) &&
+          !Array.isArray(this.children.input)
+        ) {
+          const isVisibitity = this.children.eye
+            .getContent()
+            ?.querySelector('img')!
+            .src.endsWith('visibility.svg');
+
+          if (isVisibitity) {
             this.children.eye.setProps({
               icon: 'visibility_off',
             });
