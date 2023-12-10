@@ -7,7 +7,7 @@ interface ChatPreviewProps {
   name: string;
   lastMessage: string;
   active?: 'active' | '';
-  chatList?: any;
+  onClick?: any;
   events?: {
     click: () => void;
   };
@@ -22,7 +22,6 @@ export class ChatPreview extends Block {
         ...props,
         events: {
           click: () => {
-            console.log(props.chatList());
             this.setProps({
               active: 'active',
             });
