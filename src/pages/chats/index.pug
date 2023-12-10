@@ -9,4 +9,8 @@ block content
       .chat-list
         each chatInfo in chats
           != chatInfo
-    !=chat
+    if !isChangeChat
+      .no-messages
+        p Выберите чат чтобы отправить сообщение
+    else
+      !=chat

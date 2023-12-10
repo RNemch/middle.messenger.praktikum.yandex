@@ -20,13 +20,6 @@ export class ChatPreview extends Block {
       {
         active: '',
         ...props,
-        events: {
-          click: () => {
-            this.setProps({
-              active: 'active',
-            });
-          },
-        },
       },
     );
   }

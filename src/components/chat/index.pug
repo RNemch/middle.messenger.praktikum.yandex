@@ -1,4 +1,10 @@
-if !messages
-  p Выберите чат чтобы отправить сообщение
-else
-  .chat
+.head 
+  !=head
+.messages
+  each message in messages
+    if message!=''
+      p
+        !=message
+form.add-message 
+  !=addMessage
+  !=pushMessage

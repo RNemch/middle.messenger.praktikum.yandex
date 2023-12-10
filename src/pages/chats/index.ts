@@ -3,15 +3,19 @@ import { Chat } from '../../components/chat';
 import { Input } from '../../components/input';
 import Block from '../../utils/block';
 import { render } from '../../utils/render';
+import { chats } from './const';
 import template from './index.pug';
 
-interface ChatsProps {}
+interface ChatsProps {
+  isChangeChat?: boolean;
+}
 
 export class ChatsPage extends Block {
   constructor(props?: ChatsProps) {
     super(
       { tagName: 'main' },
       {
+        isChangeChat: false,
         ...props,
       },
     );
@@ -33,6 +37,36 @@ export class ChatsPage extends Block {
       onClick: () => {
         render('profile');
       },
+    });
+
+    this.children.chats = chats.map((el) => {
+      el.setProps({
+        events: {
+          click: () => {
+            el.setProps({
+              active: 'active',
+            });
+            this.setProps({
+              isChangeChat: true,
+            });
+            if (Array.isArray(this.children.chats)) {
+              this.children.chats.forEach((element) => {
+                if (
+                  element
+                    .getContent()!
+                    .querySelector('.chat-preview-container')!.id !==
+                  el.getContent()!.querySelector('.chat-preview-container')!.id
+                ) {
+                  element.setProps({
+                    active: '',
+                  });
+                }
+              });
+            }
+          },
+        },
+      });
+      return el;
     });
   }
 
