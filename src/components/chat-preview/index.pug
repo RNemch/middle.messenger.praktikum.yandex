@@ -1,11 +1,9 @@
-mixin chatPreview(id, icon, name, lastMessage)
-  block content
-    .chat-preview-container(id=id)
-      .chat-icon
-        if icon
-          img(src=icon, alt=name)
-        else
-          p #{ name }
-      .chat-info
-        h1 #{ name }
-        p #{ lastMessage }
+.chat-preview-container(id=id, class=active)
+  .chat-icon
+    if icon
+      img(src=icon, alt=name)
+    else
+      p= name 
+  .chat-info
+    h1= name 
+    p= lastMessage 

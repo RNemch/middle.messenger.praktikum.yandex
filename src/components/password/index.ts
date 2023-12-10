@@ -1,19 +1,72 @@
-let btnPass = document.querySelectorAll('.password-control') as NodeListOf<HTMLElement>;
+import Block from '../../utils/block';
+import { Eye } from '../eye-button';
+import { Input } from '../input';
+import template from './index.pug';
 
-btnPass.forEach(function (btn: HTMLElement) {
-  btn.onclick = function () {
-    const context = this as HTMLElement;
-    let target = context.getAttribute('data-target');
-    if (target) {
-      let inputPass = document.querySelector(target);
-      let iconEye = context.querySelector('img');
-      if (inputPass?.getAttribute('type') === 'password') {
-        inputPass.setAttribute('type', 'text');
-        iconEye?.setAttribute('src', '/image/visibility_off.svg');
-      } else {
-        inputPass?.setAttribute('type', 'password');
-        iconEye?.setAttribute('src', '/image/visibility.svg');
-      }
-    }
-  };
-});
+interface PasswordProps {
+  id: string;
+  name: string;
+  placeholder: string;
+  type?: 'password' | 'text';
+  icon?: 'visibility' | 'visibility_off';
+  value?: string;
+}
+
+export class Password extends Block {
+  constructor(props: PasswordProps) {
+    super(
+      { tagName: 'div', className: 'password' },
+      {
+        ...props,
+        type: 'password',
+        icon: 'visibility',
+      },
+    );
+  }
+
+  init() {
+    this.children.eye = new Eye({
+      icon: 'visibility',
+      onClick: () => {
+        if (
+          !Array.isArray(this.children.eye) &&
+          !Array.isArray(this.children.input)
+        ) {
+          const isVisibitity = this.children.eye
+            .getContent()
+            ?.querySelector('img')!
+            .src.endsWith('visibility.svg');
+
+          if (isVisibitity) {
+            this.children.eye.setProps({
+              icon: 'visibility_off',
+            });
+            this.children.input.setProps({
+              type: 'text',
+              value: this.getContent()?.querySelector('input')?.value,
+            });
+          } else {
+            this.children.eye.setProps({
+              icon: 'visibility',
+            });
+            this.children.input.setProps({
+              type: 'password',
+              value: this.getContent()?.querySelector('input')?.value,
+            });
+          }
+        }
+      },
+    });
+
+    this.children.input = new Input({
+      type: this.props.type,
+      name: this.props.name,
+      placeholder: this.props.placeholder,
+      value: this.props.value,
+    });
+  }
+
+  render() {
+    return this.compile(template, this.props);
+  }
+}
