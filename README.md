@@ -12,15 +12,9 @@
 
 - «[Home](https://ornate-shortbread-64fd7c.netlify.app)»
 
-- «[Login](https://ornate-shortbread-64fd7c.netlify.app/src/pages/login)»
-- «[Chats](https://ornate-shortbread-64fd7c.netlify.app/src/pages/chats)»
-- «[Profile](https://ornate-shortbread-64fd7c.netlify.app/src/pages/profile)»
-- «[404](https://ornate-shortbread-64fd7c.netlify.app/src/pages/404)»
-- «[500](https://ornate-shortbread-64fd7c.netlify.app/src/pages/500)»
-
 ## Команды
 
-Билд и запукс проекта на порту 3000
+Билд и запуск проекта на порту 3000
 
 ```
 npm install
