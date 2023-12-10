@@ -7,7 +7,6 @@ block content
       .search
         !=search
       .chat-list
-        .chat
-        each chat in chats
-          != chat
+        each chatInfo in chats
+          != chatInfo
     !=chat

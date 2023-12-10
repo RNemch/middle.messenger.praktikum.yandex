@@ -6,14 +6,28 @@ interface ChatPreviewProps {
   icon: string;
   name: string;
   lastMessage: string;
+  active?: 'active' | '';
+  chatList?: any;
+  events?: {
+    click: () => void;
+  };
 }
 
 export class ChatPreview extends Block {
   constructor(props: ChatPreviewProps) {
     super(
-      { tagName: 'div', className: 'input' },
+      { tagName: 'div' },
       {
+        active: '',
         ...props,
+        events: {
+          click: () => {
+            console.log(props.chatList());
+            this.setProps({
+              active: 'active',
+            });
+          },
+        },
       },
     );
   }

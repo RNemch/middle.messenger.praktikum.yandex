@@ -3,8 +3,8 @@ import { Chat } from '../../components/chat';
 import { Input } from '../../components/input';
 import Block from '../../utils/block';
 import { render } from '../../utils/render';
-import { chats } from './const';
 import template from './index.pug';
+import { ChatPreview } from '../../components/chat-preview';
 
 interface ChatsProps {}
 
@@ -25,7 +25,27 @@ export class ChatsPage extends Block {
       placeholder: 'Поиск',
     });
 
-    this.children.chats = chats;
+    this.children.chats = [
+      new ChatPreview({
+        id: 'one',
+        icon: '',
+        name: 'Андрей',
+        lastMessage: 'Изображение',
+        chatList: () => {
+          if (Array.isArray(this.children.chats))
+            return this.children.chats.map(
+              (el) => el.getContent()?.querySelector('.chat-preview-container'),
+            );
+        },
+      }),
+      new ChatPreview({
+        id: 'two',
+        icon: '',
+        name: 'Киноклуб',
+        lastMessage:
+          'Тут очень интересный текст, который непременно нужно прочитать',
+      }),
+    ];
 
     this.children.chat = new Chat({});
 
