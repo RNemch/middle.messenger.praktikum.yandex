@@ -3,10 +3,10 @@ import { Info } from '../../components/info';
 import Block from '../../utils/block';
 import { render } from '../../utils/render';
 import template from './index.pug';
-import { data, name, passwords } from './const.ts';
+import { data, name, passwords } from './const';
 import { Form } from '../../components/form';
 import { Input } from '../../components/input';
-import { addActive } from './script.ts';
+import { addActive } from './script';
 
 interface ProfileProps {
   name: string;
@@ -19,7 +19,7 @@ export class ProfilePage extends Block {
       {
         ...props,
         name: name,
-      }
+      },
     );
   }
 
@@ -38,7 +38,7 @@ export class ProfilePage extends Block {
         new Info({
           label: el.label,
           text: el.text,
-        })
+        }),
     );
 
     this.children.changeDataButton = new Button({
@@ -71,7 +71,7 @@ export class ProfilePage extends Block {
         (el) =>
           new Input({
             ...el,
-          })
+          }),
       ),
       buttonProps: {
         type: 'submit',

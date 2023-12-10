@@ -17,7 +17,7 @@ export class LoginPage extends Block {
       {
         ...props,
         isActive: '',
-      }
+      },
     );
   }
 

@@ -11,7 +11,7 @@ export class Chat extends Block {
       { tagName: 'div', className: 'no-messages' },
       {
         ...props,
-      }
+      },
     );
   }
 

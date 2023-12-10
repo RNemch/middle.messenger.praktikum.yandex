@@ -1,9 +1,9 @@
 const VALIDATION: Record<
-  string,
-  {
-    pattern: RegExp;
-    errorMessage: string;
-  }
+string,
+{
+  pattern: RegExp;
+  errorMessage: string;
+}
 > = {
   login: {
     pattern: /^(?=.*[a-zA-Z])([a-zA-Z0-9-_]){3,20}$/,

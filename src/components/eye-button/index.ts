@@ -19,7 +19,7 @@ export class Eye extends Block {
         events: {
           click: props.onClick,
         },
-      }
+      },
     );
   }
 

@@ -23,7 +23,7 @@ export class Button extends Block {
         events: {
           click: props.onClick,
         },
-      }
+      },
     );
   }
 

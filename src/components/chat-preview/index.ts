@@ -14,7 +14,7 @@ export class ChatPreview extends Block {
       { tagName: 'div', className: 'input' },
       {
         ...props,
-      }
+      },
     );
   }
 

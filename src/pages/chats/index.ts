@@ -14,7 +14,7 @@ export class ChatsPage extends Block {
       { tagName: 'main' },
       {
         ...props,
-      }
+      },
     );
   }
 

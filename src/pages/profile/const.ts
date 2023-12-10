@@ -2,7 +2,7 @@ import { Password } from '../../components/password';
 
 interface Data {
   label: string;
-  text: string;
+  value: string;
   type: 'email' | 'text' | 'tel' | 'email' | 'password';
   name: string;
 }
@@ -12,37 +12,37 @@ export const name = 'Иван Сидоров';
 export const data: Data[] = [
   {
     label: 'Почта',
-    text: 'Test123@yandex.ru',
+    value: 'Test123@yandex.ru',
     type: 'email',
     name: 'email',
   },
   {
     label: 'Логин',
-    text: 'Test123',
+    value: 'Test123',
     type: 'text',
     name: 'login',
   },
   {
     label: 'Имя',
-    text: 'Иван',
+    value: 'Иван',
     type: 'text',
     name: 'first_name',
   },
   {
     label: 'Фамилия',
-    text: 'Сидоров',
+    value: 'Сидоров',
     type: 'text',
     name: 'second_name',
   },
   {
     label: 'Имя в чате',
-    text: 'Иван Сидоров',
+    value: 'Иван Сидоров',
     type: 'text',
     name: 'display_name',
   },
   {
     label: 'Телефон',
-    text: '+7 (999) 123-45-67',
+    value: '+79991234567',
     type: 'tel',
     name: 'phone',
   },

@@ -12,7 +12,7 @@ export class Info extends Block {
       { tagName: 'div', className: 'info' },
       {
         ...props,
-      }
+      },
     );
   }
 

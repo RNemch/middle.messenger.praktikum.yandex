@@ -17,7 +17,7 @@ export class Toggle extends Block {
         events: {
           click: props.onClick,
         },
-      }
+      },
     );
   }
 

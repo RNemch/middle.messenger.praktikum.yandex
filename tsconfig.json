@@ -1,23 +1,16 @@
 {
+  "include": ["src", "vite-plugin-pug-precompile.ts", "vite.config.ts"],
+  "exclude": ["./dist"],
   "compilerOptions": {
-    "target": "ES2020",
-    "useDefineForClassFields": true,
-    "module": "ESNext",
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
-    "skipLibCheck": true,
-
-    /* Bundler mode */
-    "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-
-    /* Linting */
-    "strict": true,
+    "noImplicitAny": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
-  },
-  "include": ["src", "vite-plugin-pug-precompile.ts"]
+    "sourceMap": true,
+    "strictNullChecks": true,
+    "target": "ES6",
+    "module": "ES6",
+    "allowJs": true,
+    "moduleResolution": "Node",
+    "typeRoots": ["./src/@types", "./node_modules/@types"]
+  }
 }

@@ -20,7 +20,7 @@ export class Password extends Block {
         ...props,
         type: 'password',
         icon: 'visibility',
-      }
+      },
     );
   }
 

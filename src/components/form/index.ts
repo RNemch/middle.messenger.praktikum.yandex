@@ -27,7 +27,7 @@ export class Form extends Block {
       { tagName: 'form' },
       {
         ...props,
-      }
+      },
     );
   }
 

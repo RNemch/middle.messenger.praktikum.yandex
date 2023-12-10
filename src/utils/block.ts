@@ -10,11 +10,17 @@ class Block {
   };
 
   public id: string = nanoid(6);
+
   protected props: any;
+
   protected refs: Record<string, Block> = {};
+
   public children: Record<string, Block | Block[]>;
+
   private eventBus: () => EventBus;
+
   private _element: HTMLElement | null = null;
+
   private _meta: {
     props: any;
     container: { tagName: string; className?: string };
@@ -26,7 +32,10 @@ class Block {
    *
    * @returns {void}
    */
-  constructor(container: { tagName: string; className?: string }, propsWithChildren: any = {}) {
+  constructor(
+    container: { tagName: string; className?: string },
+    propsWithChildren: any = {},
+  ) {
     const eventBus = new EventBus();
 
     const { props, children } = this._getChildrenAndProps(propsWithChildren);
@@ -49,7 +58,10 @@ class Block {
     const children: Record<string, Block | Block[]> = {};
 
     Object.entries(childrenAndProps).forEach(([key, value]) => {
-      if (value instanceof Block || (Array.isArray(value) && value.every((item) => item instanceof Block))) {
+      if (
+        value instanceof Block ||
+        (Array.isArray(value) && value.every((item) => item instanceof Block))
+      ) {
         children[key] = value;
       } else {
         props[key] = value;
@@ -59,7 +71,9 @@ class Block {
   }
 
   _addEvents() {
-    const { events = {} } = this.props as { events: Record<string, () => void> };
+    const { events = {} } = this.props as {
+      events: Record<string, () => void>;
+    };
 
     Object.keys(events).forEach((eventName) => {
       this._element?.addEventListener(eventName, events[eventName]);
@@ -138,7 +152,9 @@ class Block {
     const contextAndStubs = { ...context };
     Object.entries(this.children).forEach(([name, component]) => {
       if (Array.isArray(component)) {
-        contextAndStubs[name] = component.map((c) => `<div data-id="${c.id}"></div>`);
+        contextAndStubs[name] = component.map(
+          (c) => `<div data-id="${c.id}"></div>`,
+        );
         return;
       }
 
@@ -211,7 +227,9 @@ class Block {
 
   _createDocumentElement(container: { tagName: string; className?: string }) {
     const elem = document.createElement(container.tagName);
-    container.className && elem.classList.add(container.className);
+    if (container.className) {
+      elem.classList.add(container.className);
+    }
     return elem;
   }
 
