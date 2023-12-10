@@ -4,8 +4,6 @@ import { Input } from '../../components/input';
 import Block from '../../utils/block';
 import { render } from '../../utils/render';
 import template from './index.pug';
-import { ChatPreview } from '../../components/chat-preview';
-import { chats } from './const';
 
 interface ChatsProps {}
 
@@ -24,10 +22,6 @@ export class ChatsPage extends Block {
       name: 'searc',
       type: 'text',
       placeholder: 'Поиск',
-    });
-
-    this.children.chats = chats.map((el) => {
-      el.onClick = () => {};
     });
 
     this.children.chat = new Chat({});
