@@ -18,6 +18,22 @@
     }
   }
 
+  button.profile-btn {
+    background-color: @primary-color;
+    padding: 10px;
+    width: 160px;
+    border: transparent;
+    border-radius: 20px;
+    color: #fff;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+
+    &.red {
+      background-color: red;
+    }
+  }
+
   .profile {
     display: flex;
     flex-direction: column;
@@ -33,7 +49,7 @@
     .profile-icon {
       margin-left: auto;
       margin-right: auto;
-      background-color: rgba(41, 137, 229, 0.3);
+      background-color: rgba(41, 137, 229, 30%);
       width: 100px;
       height: 100px;
       border-radius: 500px;
@@ -50,17 +66,11 @@
         pointer-events: none;
       }
 
-      &:hover {
-        .load {
-          bottom: 0;
-        }
-      }
-
       .load {
         position: absolute;
         width: 100px;
         bottom: -100px;
-        background-color: rgba(0, 0, 0, 0.5);
+        background-color: rgba(0, 0, 0, 50%);
         border-bottom-left-radius: 50px;
         border-bottom-right-radius: 50px;
         display: flex;
@@ -70,12 +80,19 @@
         transition: 0.6s;
       }
 
+      &:hover {
+        .load {
+          bottom: 0;
+        }
+      }
+
       span {
         color: #fff;
         font-size: 12px;
         align-self: center;
       }
     }
+
     .profile-info {
       display: flex;
       flex-direction: column;
@@ -98,6 +115,7 @@
         margin-top: 40px;
         display: flex;
         gap: 20px;
+
         a {
           text-decoration: none;
         }
@@ -109,6 +127,7 @@
       opacity: 0;
       margin: 0 auto;
       height: 0;
+
       form {
         display: flex;
         flex-direction: column;
@@ -117,6 +136,7 @@
         input {
           width: 440px;
         }
+
         button.profile-btn {
           margin: 50px auto 0;
           width: 300px;
@@ -130,21 +150,7 @@
       z-index: 100;
     }
   }
-  button.profile-btn {
-    background-color: @primary-color;
-    padding: 10px;
-    width: 160px;
-    border: transparent;
-    border-radius: 20px;
-    color: #fff;
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
 
-    &.red {
-      background-color: red;
-    }
-  }
   .button {
     display: contents;
   }
