@@ -25,6 +25,8 @@
     "eslint-plugin-prettier": "^5.0.1",
     "less": "^4.2.0",
     "prettier": "^3.1.0",
+    "stylelint": "^15.11.0",
+    "stylelint-config-standard-less": "^2.0.0",
     "typescript": "^5.2.2",
     "vite": "^5.0.0",
     "vite-plugin-pug-transformer": "^1.0.5"
@@ -34,7 +36,6 @@
     "less": "^4.2.0",
     "nanoid": "^5.0.4",
     "pug": "^3.0.2",
-    "stylelint-config-standard-less": "^2.0.0",
     "vite-plugin-pug": "^0.3.2"
   }
 }
