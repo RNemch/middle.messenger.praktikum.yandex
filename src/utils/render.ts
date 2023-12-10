@@ -6,7 +6,7 @@ import { NavPage } from '../pages/nav';
 import { ProfilePage } from '../pages/profile';
 
 const ROUTES = {
-  nav: NavPage,
+  home: NavPage,
   login: LoginPage,
   chats: ChatsPage,
   profile: ProfilePage,
