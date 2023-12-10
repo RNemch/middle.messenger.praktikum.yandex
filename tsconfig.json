@@ -1,6 +1,7 @@
 {
   "include": ["src", "vite-plugin-pug-precompile.ts", "vite.config.ts"],
   "compilerOptions": {
+    "strict": true,
     "noImplicitAny": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
@@ -8,8 +9,14 @@
     "strictNullChecks": true,
     "target": "ES6",
     "module": "ES6",
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "skipLibCheck": true,
     "allowJs": true,
-    "moduleResolution": "Node",
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
     "typeRoots": ["./src/@types", "./node_modules/@types"]
   }
 }
