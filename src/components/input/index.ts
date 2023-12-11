@@ -20,19 +20,14 @@ export class Input extends Block {
       {
         ...props,
         events: {
-          click: () => {
+          focusout: () => {
             const elem = this.getContent();
             const input = elem!.querySelector('input');
-
-            if (input && elem) {
-              input.addEventListener('blur', () => {
-                const message = validation(elem).message;
-                this.setProps({
-                  value: input.value,
-                  message: message,
-                });
-              });
-            }
+            const message = validation(elem!).message;
+            this.setProps({
+              value: input!.value,
+              message: message,
+            });
           },
         },
       },
