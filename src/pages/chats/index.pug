@@ -1,0 +1,16 @@
+block content
+  #content.content
+    .sidebar
+      .sidebar-top
+        img(src="/image/add.svg", alt="add")
+        !=profileButton
+      .search
+        !=search
+      .chat-list
+        each chatInfo in chats
+          != chatInfo
+    if !isChangeChat
+      .no-messages
+        p Выберите чат чтобы отправить сообщение
+    else
+      !=chat

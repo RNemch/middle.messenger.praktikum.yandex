@@ -1,0 +1,25 @@
+block content
+
+  #content.content
+    .sidebar-profile
+      !=chatsButton
+    .profile
+      .profile-icon
+        img(src="/image/camera.svg", alt="photo")
+        .load
+          span Загрузить
+      h1= name
+      .profile-info.active
+        .profile-info-list
+          each elem in info
+            !=elem
+        .profile-buttons
+          !=changeDataButton
+          !=changePasswordButton
+          !=exitButton
+
+      .profile-change-data
+        !=formChangeData
+
+      .profile-change-password
+        !=formChangePassword

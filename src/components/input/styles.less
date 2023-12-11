@@ -1,0 +1,38 @@
+.input {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  height: 54px;
+
+  input {
+    background-color: @background-color;
+    border: 1px solid @primary-color;
+    margin: 8px 0 5px;
+    padding: 10px 15px;
+    font-size: 13px;
+    border-radius: 20px;
+    outline: none;
+  }
+
+  span.error {
+    height: 0;
+    font-size: 8px;
+    color: #f00;
+    margin-bottom: 4px;
+  }
+
+  &.error {
+    input {
+      border-color: #f00;
+      margin-bottom: 2px;
+    }
+
+    span.error {
+      height: 3px;
+      font-size: 8px;
+      color: #f00;
+      margin-bottom: 4px;
+      padding-left: 15px;
+    }
+  }
+}
