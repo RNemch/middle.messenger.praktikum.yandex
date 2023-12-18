@@ -2,21 +2,16 @@ import { Button } from '../../components/button';
 import { Chat } from '../../components/chat';
 import { Input } from '../../components/input';
 import Block from '../../utils/block';
-import { render } from '../../utils/render';
+import { Router } from '../../utils/router';
 import { chats } from './const';
 import template from './index.pug';
 
-interface ChatsProps {
-  isChangeChat?: boolean;
-}
-
 export class ChatsPage extends Block {
-  constructor(props?: ChatsProps) {
+  constructor() {
     super(
       { tagName: 'main' },
       {
         isChangeChat: false,
-        ...props,
       },
     );
   }
@@ -35,7 +30,8 @@ export class ChatsPage extends Block {
       name: 'Профиль >',
       type: 'button',
       onClick: () => {
-        render('profile');
+        const router = new Router();
+        router.go('/settings');
       },
     });
 

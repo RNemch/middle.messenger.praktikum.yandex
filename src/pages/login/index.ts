@@ -2,20 +2,17 @@ import { Form } from '../../components/form';
 import { Password } from '../../components/password';
 import { Toggle } from '../../components/toggle';
 import Block from '../../utils/block';
-import { render } from '../../utils/render';
+import { Router } from '../../utils/router';
 import { inputLogin, inputsRegistration, passwordsRegistration } from './const';
 import template from './index.pug';
 
-interface LoginProps {
-  isActive?: string;
-}
+const router = new Router();
 
 export class LoginPage extends Block {
-  constructor(props?: LoginProps) {
+  constructor() {
     super(
       { tagName: 'div' },
       {
-        ...props,
         isActive: '',
       },
     );
@@ -52,7 +49,7 @@ export class LoginPage extends Block {
         type: 'submit',
         name: 'Авторизоваться',
         className: 'confirm',
-        callback: () => render('chats'),
+        callback: () => router.go('/chats'),
       },
     });
 
@@ -64,7 +61,7 @@ export class LoginPage extends Block {
         name: 'Зарегистрироваться',
         type: 'submit',
         className: 'confirm',
-        callback: () => render('chats'),
+        callback: () => router.go('/chats'),
       },
     });
   }

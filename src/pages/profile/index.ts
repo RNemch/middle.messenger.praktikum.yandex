@@ -1,23 +1,20 @@
 import { Button } from '../../components/button';
 import { Info } from '../../components/info';
 import Block from '../../utils/block';
-import { render } from '../../utils/render';
 import template from './index.pug';
 import { data, name, passwords } from './const';
 import { Form } from '../../components/form';
 import { Input } from '../../components/input';
 import { addActive } from './script';
+import { Router } from '../../utils/router';
 
-interface ProfileProps {
-  name: string;
-}
+const router = new Router();
 
 export class ProfilePage extends Block {
-  constructor(props?: ProfileProps) {
+  constructor() {
     super(
       { tagName: 'main' },
       {
-        ...props,
         name: name,
       },
     );
@@ -29,7 +26,7 @@ export class ProfilePage extends Block {
       name: '< Чаты',
       type: 'button',
       onClick: () => {
-        render('chats');
+        router.go('/chats');
       },
     });
 
@@ -62,7 +59,7 @@ export class ProfilePage extends Block {
       type: 'button',
       className: 'profile-btn red',
       onClick: () => {
-        render('login');
+        router.go('/login');
       },
     });
 

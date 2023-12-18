@@ -1,6 +1,6 @@
 import { Button } from '../../components/button';
 import Block from '../../utils/block';
-import { render } from '../../utils/render';
+import { Router } from '../../utils/router';
 import template from './index.pug';
 
 export class Erorr500Page extends Block {
@@ -14,7 +14,8 @@ export class Erorr500Page extends Block {
       name: 'Назад к чатам',
       type: 'button',
       onClick: () => {
-        render('chats');
+        const router = new Router();
+        router.go('/chats');
       },
     });
   }

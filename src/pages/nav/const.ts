@@ -1,5 +1,8 @@
 import { Button } from '../../components/button';
-import { render } from '../../utils/render';
+import { Router } from '../../utils/router';
+// import { render } from '../../utils/render';
+
+const router = new Router();
 
 export const pages = [
   new Button({
@@ -7,7 +10,7 @@ export const pages = [
     type: 'button',
     name: 'Логин',
     onClick: () => {
-      render('login');
+      router.go('/login');
     },
   }),
   new Button({
@@ -15,7 +18,7 @@ export const pages = [
     type: 'button',
     name: 'Чаты',
     onClick: () => {
-      render('chats');
+      router.go('/chats');
     },
   }),
   new Button({
@@ -23,7 +26,7 @@ export const pages = [
     type: 'button',
     name: 'Профиль',
     onClick: () => {
-      render('profile');
+      router.go('/settings');
     },
   }),
   new Button({
@@ -31,7 +34,7 @@ export const pages = [
     type: 'button',
     name: '404',
     onClick: () => {
-      render('error404');
+      router.go('/404');
     },
   }),
   new Button({
@@ -39,7 +42,7 @@ export const pages = [
     type: 'button',
     name: '500',
     onClick: () => {
-      render('error500');
+      router.go('/500');
     },
   }),
 ];

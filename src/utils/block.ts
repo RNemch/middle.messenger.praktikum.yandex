@@ -1,7 +1,7 @@
 import { EventBus } from './event-bus';
 import { nanoid } from 'nanoid';
 
-class Block<Props extends Record<string, any> = any> {
+class Block {
   static EVENTS = {
     INIT: 'init',
     FLOW_CDM: 'flow:component-did-mount',
@@ -11,7 +11,7 @@ class Block<Props extends Record<string, any> = any> {
 
   public id: string = nanoid(6);
 
-  protected props: Props;
+  protected props: any;
 
   protected refs: Record<string, Block> = {};
 
@@ -139,7 +139,7 @@ class Block<Props extends Record<string, any> = any> {
     return true;
   }
 
-  setProps = (nextProps: Props) => {
+  setProps = (nextProps: any) => {
     if (!nextProps) {
       return;
     }
