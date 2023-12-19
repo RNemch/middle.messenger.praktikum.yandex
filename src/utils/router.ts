@@ -1,3 +1,4 @@
+import AuthController from '../controllers/auth-controller';
 import Block from './block';
 import { Route } from './route';
 
@@ -41,10 +42,14 @@ export class Router {
   _onRoute(pathname: string) {
     let route = this.getRoute(pathname);
 
-    console.log(route);
-
     if (!route) {
-      route = this.getRoute('/404');
+      return;
+    }
+    if (!['/', '/sign-up', '/404', '/500'].find((el) => el === pathname)) {
+      AuthController.user().catch(() => {
+        route = this.getRoute('/');
+        window.location.pathname = '/';
+      });
     }
 
     if (this._currentRoute) {
@@ -70,6 +75,12 @@ export class Router {
   }
 
   getRoute(pathname: string) {
-    return this._routes.find((route) => route.match(pathname));
+    const route = this._routes.find((route) => route.match(pathname));
+    if (route) {
+      return route;
+    } else {
+      window.location.pathname = '/404';
+      return this._routes.find((route) => route.match('/404'));
+    }
   }
 }

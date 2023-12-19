@@ -7,6 +7,7 @@ import { Form } from '../../components/form';
 import { Input } from '../../components/input';
 import { addActive } from './script';
 import { Router } from '../../utils/router';
+import AuthController from '../../controllers/auth-controller';
 
 const router = new Router();
 
@@ -26,7 +27,7 @@ export class ProfilePage extends Block {
       name: '< Чаты',
       type: 'button',
       onClick: () => {
-        router.go('/chats');
+        router.go('/messenger');
       },
     });
 
@@ -59,7 +60,7 @@ export class ProfilePage extends Block {
       type: 'button',
       className: 'profile-btn red',
       onClick: () => {
-        router.go('/login');
+        AuthController.logout();
       },
     });
 

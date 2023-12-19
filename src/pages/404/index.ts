@@ -15,7 +15,7 @@ export class Erorr404Page extends Block {
       type: 'button',
       onClick: () => {
         const router = new Router();
-        router.go('/chats');
+        router.go('/messenger');
       },
     });
   }

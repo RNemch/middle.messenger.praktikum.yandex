@@ -13,7 +13,7 @@ interface FormProps {
     type: string;
     name: string;
     className: string;
-    callback?: () => void;
+    callback?: (data?: DataForm) => void;
   };
 }
 
@@ -50,7 +50,7 @@ export class Form extends Block {
         if (isSuccess) {
           console.log(data);
           if (this.props.buttonProps.callback) {
-            this.props.buttonProps.callback();
+            this.props.buttonProps.callback(data);
           }
         }
       },

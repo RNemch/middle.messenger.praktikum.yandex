@@ -1,37 +1,23 @@
 import { Form } from '../../components/form';
 import { Password } from '../../components/password';
 import { Toggle } from '../../components/toggle';
+import AuthController from '../../controllers/auth-controller';
 import Block from '../../utils/block';
 import { Router } from '../../utils/router';
-import { inputLogin, inputsRegistration, passwordsRegistration } from './const';
+import { inputLogin } from './const';
 import template from './index.pug';
 
 const router = new Router();
 
-export class LoginPage extends Block {
+export class SignInPage extends Block {
   constructor() {
-    super(
-      { tagName: 'div' },
-      {
-        isActive: '',
-      },
-    );
+    super({ tagName: 'div' });
   }
 
   init() {
     this.children.toggle = new Toggle({
       onClick: () => {
-        if (!Array.isArray(this.children.toogle)) {
-          if (!this.props.isActive) {
-            this.setProps({
-              isActive: 'active',
-            });
-          } else {
-            this.setProps({
-              isActive: '',
-            });
-          }
-        }
+        router.go('/sign-up');
       },
     });
 
@@ -49,19 +35,7 @@ export class LoginPage extends Block {
         type: 'submit',
         name: 'Авторизоваться',
         className: 'confirm',
-        callback: () => router.go('/chats'),
-      },
-    });
-
-    this.children.formRegistration = new Form({
-      name: 'Регистация',
-      inputs: inputsRegistration,
-      passwords: passwordsRegistration,
-      buttonProps: {
-        name: 'Зарегистрироваться',
-        type: 'submit',
-        className: 'confirm',
-        callback: () => router.go('/chats'),
+        callback: (data: any) => AuthController.signIn(data),
       },
     });
   }
