@@ -1,5 +1,6 @@
 import AutthApi, { SignInData, SignUpData } from '../api/auth';
 import { Router } from '../utils/router';
+import store from '../utils/store';
 
 class AuthController {
   private api: AutthApi;
@@ -50,6 +51,7 @@ class AuthController {
       if (response.status !== 200) {
         throw new Error(response.response.reason);
       }
+      store.set('currentUser', response.response);
     });
   }
 }

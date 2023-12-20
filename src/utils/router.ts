@@ -39,16 +39,17 @@ export class Router {
     this._onRoute(window.location.pathname);
   }
 
-  _onRoute(pathname: string) {
+  async _onRoute(pathname: string) {
     let route = this.getRoute(pathname);
 
     if (!route) {
       return;
     }
     if (!['/', '/sign-up', '/404', '/500'].find((el) => el === pathname)) {
-      AuthController.user().catch(() => {
-        route = this.getRoute('/');
-        window.location.pathname = '/';
+      await AuthController.user().catch((e) => {
+        console.log(e);
+        // route = this.getRoute('/');
+        // window.location.pathname = '/';
       });
     }
 

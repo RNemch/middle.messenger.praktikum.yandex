@@ -31,7 +31,7 @@ export class Form extends Block {
     );
   }
 
-  init() {
+  initChildren() {
     this.children.button = new Button({
       ...this.props.buttonProps,
       onClick: (event: any) => {

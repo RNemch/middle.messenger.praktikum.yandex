@@ -4,12 +4,13 @@ import { Toggle } from '../../components/toggle';
 import AuthController from '../../controllers/auth-controller';
 import Block from '../../utils/block';
 import { Router } from '../../utils/router';
+import { withStore } from '../../utils/store';
 import { inputLogin } from './const';
 import template from './index.pug';
 
 const router = new Router();
 
-export class SignInPage extends Block {
+class SignInPage extends Block {
   constructor() {
     super({ tagName: 'div' });
   }
@@ -44,3 +45,7 @@ export class SignInPage extends Block {
     return this.compile(template, this.props);
   }
 }
+
+const Page = withStore((state) => ({ ...state.currentUser }));
+
+export default Page(SignInPage);

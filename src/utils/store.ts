@@ -6,7 +6,7 @@ export enum StoreEvents {
   Updated = 'updated',
 }
 
-interface User {
+export interface User {
   id: number;
   first_name: string;
   second_name: string;
@@ -21,7 +21,7 @@ interface StoreData {
   currentUser?: User;
 }
 
-export class Store extends EventBus {
+class Store extends EventBus {
   private state: StoreData = {};
 
   public getState() {
@@ -37,13 +37,14 @@ export class Store extends EventBus {
 
 const store = new Store();
 
-export function connect(
-  mapStateToProps: (state: StoreData) => Record<string, unknown>,
-) {
-  return function (Component: typeof Block) {
+export const withStore =
+  (mapStateToProps: (state: StoreData) => Record<string, unknown>) =>
+  (Component: typeof Block) => {
+    let state: any;
+
     return class extends Component {
       constructor(props: any) {
-        let state = mapStateToProps(store.getState());
+        state = mapStateToProps(store.getState());
 
         super({ ...props, ...state });
 
@@ -51,12 +52,14 @@ export function connect(
           const newState = mapStateToProps(store.getState());
 
           if (!isEqual(state, newState)) {
-            this.setProps({ ...newState });
+            this.setProps({
+              ...state,
+              ...newState,
+            });
           }
-
-          state = newState;
         });
       }
     };
   };
-}
+
+export default store;

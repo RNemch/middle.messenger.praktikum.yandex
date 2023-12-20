@@ -8,11 +8,12 @@ block content
         img(src="/image/camera.svg", alt="photo")
         .load
           span Загрузить
-      h1= name
+      h1= display_name
       .profile-info.active
         .profile-info-list
           each elem in info
             !=elem
+          !=info1
         .profile-buttons
           !=changeDataButton
           !=changePasswordButton

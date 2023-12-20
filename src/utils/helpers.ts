@@ -43,6 +43,7 @@ export function set(
   );
   return merge(object as Indexed, result);
 }
+
 export function isPlainObject(value: unknown): value is Indexed {
   return (
     typeof value === 'object' &&

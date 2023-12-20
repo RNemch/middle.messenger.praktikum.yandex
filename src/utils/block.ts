@@ -23,7 +23,7 @@ class Block {
 
   private _meta: {
     props: any;
-    container: { tagName: string; className?: string };
+    container?: { tagName: string; className?: string };
   };
 
   /** JSDoc
@@ -33,7 +33,7 @@ class Block {
    * @returns {void}
    */
   constructor(
-    container: { tagName: string; className?: string },
+    container?: { tagName: string; className?: string },
     propsWithChildren: any = {},
   ) {
     const eventBus = new EventBus();
@@ -47,6 +47,7 @@ class Block {
     this.children = children;
     this.props = this._makePropsProxy(props);
 
+    this.initChildren();
     this.eventBus = () => eventBus;
 
     this._registerEvents(eventBus);
@@ -99,6 +100,8 @@ class Block {
     eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
   }
 
+  protected initChildren() {}
+
   private _init() {
     this._element = this._createDocumentElement(this._meta.container);
 
@@ -107,7 +110,9 @@ class Block {
     this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
   }
 
-  protected init() {}
+  protected init() {
+    this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
+  }
 
   _componentDidMount() {
     this.componentDidMount();
@@ -243,9 +248,9 @@ class Block {
     } as any);
   }
 
-  _createDocumentElement(container: { tagName: string; className?: string }) {
-    const elem = document.createElement(container.tagName);
-    if (container.className) {
+  _createDocumentElement(container?: { tagName: string; className?: string }) {
+    const elem = document.createElement(container ? container.tagName : 'div');
+    if (container?.className) {
       elem.classList.add(container.className);
     }
     return elem;

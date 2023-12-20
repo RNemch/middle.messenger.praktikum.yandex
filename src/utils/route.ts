@@ -44,7 +44,7 @@ export class Route {
 
   render() {
     if (!this._block) {
-      this._block = new this._blockClass({ tagName: 'div' });
+      this._block = new this._blockClass();
     }
 
     const root = document.querySelector(this._props.rootQuery);

@@ -2,26 +2,23 @@ import { Button } from '../../components/button';
 import { Info } from '../../components/info';
 import Block from '../../utils/block';
 import template from './index.pug';
-import { data, name, passwords } from './const';
+import { data, passwords } from './const';
 import { Form } from '../../components/form';
 import { Input } from '../../components/input';
 import { addActive } from './script';
 import { Router } from '../../utils/router';
 import AuthController from '../../controllers/auth-controller';
+import { withStore } from '../../utils/store';
+import userController from '../../controllers/user-controller';
 
 const router = new Router();
 
-export class ProfilePage extends Block {
-  constructor() {
-    super(
-      { tagName: 'main' },
-      {
-        name: name,
-      },
-    );
+class ProfilePage extends Block {
+  constructor(props: any) {
+    super({ tagName: 'main' }, { ...props });
   }
 
-  init() {
+  initChildren() {
     this.children.chatsButton = new Button({
       tagButton: 'a',
       name: '< Чаты',
@@ -31,13 +28,22 @@ export class ProfilePage extends Block {
       },
     });
 
-    this.children.info = data.map(
-      (el) =>
-        new Info({
-          label: el.label,
-          text: el.value,
-        }),
-    );
+    this.children.infoId = new Info({
+      label: 'id',
+      text: this.props.id,
+    });
+
+    this.children.info = data.map((el) => {
+      return new Info({
+        label: el.label,
+        text: this.props[el.name],
+      });
+    });
+
+    this.children.info1 = new Info({
+      label: 'test',
+      text: this.props.phone,
+    });
 
     this.children.changeDataButton = new Button({
       name: 'Изменить данные',
@@ -69,13 +75,15 @@ export class ProfilePage extends Block {
         (el) =>
           new Input({
             ...el,
+            value: this.props[el.name],
           }),
       ),
       buttonProps: {
         type: 'submit',
         name: 'Сохранить',
         className: 'profile-btn',
-        callback: () => {
+        callback: (data: any) => {
+          userController.profile(data);
           addActive('.profile-info');
         },
       },
@@ -98,3 +106,7 @@ export class ProfilePage extends Block {
     return this.compile(template, this.props);
   }
 }
+
+const Page = withStore((state) => ({ ...state.currentUser }));
+
+export default Page(ProfilePage);
