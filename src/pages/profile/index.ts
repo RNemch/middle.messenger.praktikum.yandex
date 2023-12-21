@@ -28,21 +28,12 @@ class ProfilePage extends Block {
       },
     });
 
-    this.children.infoId = new Info({
-      label: 'id',
-      text: this.props.id,
-    });
-
     this.children.info = data.map((el) => {
       return new Info({
         label: el.label,
+        name: el.name,
         text: this.props[el.name],
       });
-    });
-
-    this.children.info1 = new Info({
-      label: 'test',
-      text: this.props.phone,
     });
 
     this.children.changeDataButton = new Button({
@@ -95,7 +86,8 @@ class ProfilePage extends Block {
         type: 'submit',
         name: 'Cохранить',
         className: 'profile-btn',
-        callback: () => {
+        callback: (data: any) => {
+          userController.password(data);
           addActive('.profile-info');
         },
       },

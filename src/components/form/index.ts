@@ -41,7 +41,7 @@ export class Form extends Block {
         this.getContent()
           ?.querySelectorAll('div.input')
           .forEach((el) => {
-            isSuccess = validation(el).verify;
+            isSuccess = validation(el).verify && isSuccess;
 
             const input = el.querySelector('input');
             data[`${input!.name}`] = input!.value;

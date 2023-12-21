@@ -9,6 +9,11 @@ export interface UserData {
   phone: string;
 }
 
+export interface UserPassword {
+  oldPassword: string;
+  newPassword: string;
+}
+
 export default class UserApi extends BaseAPI {
   constructor() {
     super('/user');
@@ -16,5 +21,9 @@ export default class UserApi extends BaseAPI {
 
   profile(data: UserData): Promise<XMLHttpRequest> {
     return this.http.put('/profile', data);
+  }
+
+  password(data: UserPassword): Promise<XMLHttpRequest> {
+    return this.http.put('/password', data);
   }
 }

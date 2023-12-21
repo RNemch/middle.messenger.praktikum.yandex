@@ -1,5 +1,4 @@
-import UserApi, { UserData } from '../api/user';
-import { Router } from '../utils/router';
+import UserApi, { UserData, UserPassword } from '../api/user';
 import store from '../utils/store';
 
 class UserController {
@@ -17,8 +16,19 @@ class UserController {
           throw new Error(response.response.reason);
         }
         store.set('currentUser', response.response);
-        // const router = new Router();
-        // router.go('/settings');
+      })
+      .catch((e) => {
+        alert(e);
+      });
+  }
+
+  async password(data: UserPassword) {
+    await this.api
+      .password(data)
+      .then((response) => {
+        if (response.status !== 200) {
+          throw new Error(response.response.reason);
+        }
       })
       .catch((e) => {
         alert(e);
