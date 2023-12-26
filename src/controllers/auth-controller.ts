@@ -1,4 +1,5 @@
 import AutthApi, { SignInData, SignUpData } from '../api/auth';
+import { httpErrorHandling } from '../utils/helper-controller';
 import { Router } from '../utils/router';
 import store from '../utils/store';
 
@@ -10,49 +11,38 @@ class AuthController {
   }
 
   async signIn(data: SignInData) {
-    await this.api
-      .signIn(data)
-      .then((response) => {
-        if (response.status !== 200) {
-          throw new Error(response.response.reason);
-        }
-        const router = new Router();
-        router.go('/messenger');
-      })
-      .catch((e) => {
-        alert(e);
-      });
+    const response = await this.api.signIn(data);
+
+    httpErrorHandling(response);
+
+    const router = new Router();
+    router.go('/messenger');
   }
 
   async signUp(data: SignUpData) {
-    await this.api
-      .signUp(data)
-      .then((response) => {
-        if (response.status !== 200) {
-          throw new Error(response.response.reason);
-        }
-        const router = new Router();
-        router.go('/messenger');
-      })
-      .catch((e) => {
-        alert(e);
-      });
+    const response = await this.api.signUp(data);
+
+    httpErrorHandling(response);
+
+    const router = new Router();
+    router.go('/messenger');
   }
 
   async logout() {
-    await this.api.logout().then(() => {
-      const router = new Router();
-      router.go('/');
-    });
+    const response = await this.api.logout();
+
+    httpErrorHandling(response);
+
+    const router = new Router();
+    router.go('/');
   }
 
   async user() {
-    await this.api.user().then((response) => {
-      if (response.status !== 200) {
-        throw new Error(response.response.reason);
-      }
-      store.set('currentUser', response.response);
-    });
+    const response = await this.api.user();
+
+    httpErrorHandling(response);
+
+    store.set('currentUser', response.response);
   }
 }
 

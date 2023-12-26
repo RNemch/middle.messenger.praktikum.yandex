@@ -33,6 +33,7 @@ export interface ChatData {
 interface StoreData {
   currentUser?: User;
   chats?: ChatData[];
+  users?: Omit<User, 'phone' | 'email'>;
 }
 
 class Store extends EventBus {

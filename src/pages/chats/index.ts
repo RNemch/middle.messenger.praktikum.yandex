@@ -119,27 +119,35 @@ class ChatsPage extends Block {
 
     this.children.modal = new Modal({
       name: 'Создать чат',
-      content: new Form({
-        inputs: [
-          new Input({
-            name: 'title',
-            type: 'text',
-            placeholder: 'Название чата',
-          }),
-        ],
-        buttonProps: {
-          type: 'submit',
-          name: 'Сохранить',
-          className: 'modal-btn-submit',
-          callback: (data: any) => {
-            this.setProps({
-              isAddChat: false,
-            });
-            chatsController.addChat(data);
-            chatsController.chats();
+      close: () => {
+        this.setProps({
+          isAddChat: false,
+        });
+      },
+      content: [
+        new Form({
+          inputs: [
+            new Input({
+              name: 'title',
+              type: 'text',
+              placeholder: 'Название чата',
+            }),
+          ],
+          buttonProps: {
+            type: 'submit',
+            name: 'Сохранить',
+            className: 'modal-btn-submit',
+            callback: (data: any) => {
+              chatsController.addChat(data).then(() =>
+                this.setProps({
+                  isAddChat: false,
+                }),
+              );
+              // chatsController.chats();
+            },
           },
-        },
-      }),
+        }),
+      ],
     });
   }
 

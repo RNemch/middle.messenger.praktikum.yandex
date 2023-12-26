@@ -1,4 +1,6 @@
 .modal-content
+  !=closeButton
   if name 
     h2= name
-  !=content
+  each el in content
+    !=el

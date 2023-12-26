@@ -1,9 +1,11 @@
 import Block from '../../utils/block';
+import { Button } from '../button';
 import template from './index.pug';
 
 interface ModalProps {
   name?: string;
-  content: Block;
+  content: Block[];
+  close?: () => void;
 }
 
 export class Modal extends Block {
@@ -14,6 +16,17 @@ export class Modal extends Block {
         ...props,
       },
     );
+  }
+
+  initChildren() {
+    this.children.closeButton = new Button({
+      tagButton: 'img',
+      name: 'close',
+      type: 'button',
+      src: '/image/close.svg',
+      className: 'modal-close-btn',
+      onClick: this.props.close,
+    });
   }
 
   render() {

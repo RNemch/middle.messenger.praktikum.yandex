@@ -52,17 +52,19 @@ export class Router {
 
     this._currentRoute = route!;
 
-    route!.render();
-
     if (!['/', '/sign-up', '/404', '/500'].find((el) => el === pathname)) {
-      AuthController.user().catch(() => {
-        route = this.getRoute('/');
-        window.location.pathname = '/';
-        this._currentRoute!.leave();
-        this._currentRoute = route!;
+      AuthController.user()
+        .then(() => route!.render())
+        .catch(() => {
+          route = this.getRoute('/');
+          window.location.pathname = '/';
+          this._currentRoute!.leave();
+          this._currentRoute = route!;
 
-        route!.render();
-      });
+          route!.render();
+        });
+    } else {
+      route!.render();
     }
   }
 

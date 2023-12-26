@@ -1,4 +1,5 @@
 import UserApi, { UserData, UserPassword } from '../api/user';
+import { httpErrorHandling } from '../utils/helper-controller';
 import store from '../utils/store';
 
 class UserController {
@@ -9,43 +10,25 @@ class UserController {
   }
 
   async profile(data: UserData) {
-    await this.api
-      .profile(data)
-      .then((response) => {
-        if (response.status !== 200) {
-          throw new Error(response.response.reason);
-        }
-        store.set('currentUser', response.response);
-      })
-      .catch((e) => {
-        alert(e);
-      });
+    const response = await this.api.profile(data);
+
+    httpErrorHandling(response);
+
+    store.set('currentUser', response.response);
   }
 
   async password(data: UserPassword) {
-    await this.api
-      .password(data)
-      .then((response) => {
-        if (response.status !== 200) {
-          throw new Error(response.response.reason);
-        }
-      })
-      .catch((e) => {
-        alert(e);
-      });
+    const response = await this.api.password(data);
+
+    httpErrorHandling(response);
   }
 
   async search(data: { login: string }) {
-    await this.api
-      .search(data)
-      .then((response) => {
-        if (response.status !== 200) {
-          throw new Error(response.response.reason);
-        }
-      })
-      .catch((e) => {
-        alert(e);
-      });
+    const response = await this.api.search({ ...data });
+
+    httpErrorHandling(response);
+
+    return response.response;
   }
 }
 

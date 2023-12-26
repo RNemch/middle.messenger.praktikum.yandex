@@ -16,4 +16,16 @@ export default class ChatsApi extends BaseAPI {
   deleteChat(data: { chatId: number }): Promise<XMLHttpRequest> {
     return this.http.delete('', data);
   }
+
+  addUser(data: { users: number[]; chatId: number }): Promise<XMLHttpRequest> {
+    return this.http.put('/users', data);
+  }
+
+  getUsers(data: { id: number }): Promise<XMLHttpRequest> {
+    return this.http.get(`/${data.id}/users`);
+  }
+
+  delUser(data: { users: number[]; chatId: number }): Promise<XMLHttpRequest> {
+    return this.http.delete('/users', data);
+  }
 }

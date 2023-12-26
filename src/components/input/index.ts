@@ -10,9 +10,11 @@ interface InputProps {
   value?: string;
   message?: string;
   onChange?: () => void;
+  onEnter?: () => void;
   events?: {
     change?: () => void;
     focusout?: () => void;
+    keypress: () => void;
   };
 }
 
@@ -25,6 +27,11 @@ export class Input extends Block {
         events: {
           ...props.events,
           change: props.onChange,
+          keypress: (event: any) => {
+            if (event.key === 'Enter') {
+              return props.onEnter;
+            }
+          },
           focusout: () => {
             const elem = this.getContent();
             const input = elem!.querySelector('input');
