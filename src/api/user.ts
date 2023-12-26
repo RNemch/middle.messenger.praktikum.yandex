@@ -26,4 +26,8 @@ export default class UserApi extends BaseAPI {
   password(data: UserPassword): Promise<XMLHttpRequest> {
     return this.http.put('/password', data);
   }
+
+  search(data: { login: string }): Promise<XMLHttpRequest> {
+    return this.http.post('/search', data);
+  }
 }

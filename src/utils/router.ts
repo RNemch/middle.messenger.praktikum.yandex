@@ -45,13 +45,6 @@ export class Router {
     if (!route) {
       return;
     }
-    if (!['/', '/sign-up', '/404', '/500'].find((el) => el === pathname)) {
-      AuthController.user().catch((e) => {
-        console.log(e);
-        // route = this.getRoute('/');
-        // window.location.pathname = '/';
-      });
-    }
 
     if (this._currentRoute) {
       this._currentRoute.leave();
@@ -60,6 +53,17 @@ export class Router {
     this._currentRoute = route!;
 
     route!.render();
+
+    if (!['/', '/sign-up', '/404', '/500'].find((el) => el === pathname)) {
+      AuthController.user().catch(() => {
+        route = this.getRoute('/');
+        window.location.pathname = '/';
+        this._currentRoute!.leave();
+        this._currentRoute = route!;
+
+        route!.render();
+      });
+    }
   }
 
   go(pathname: string) {

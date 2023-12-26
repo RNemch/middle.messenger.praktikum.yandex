@@ -1,3 +1,4 @@
+import { UserData } from '../api/user';
 import Block from './block';
 import { EventBus } from './event-bus';
 import { set, isEqual } from './helpers';
@@ -17,8 +18,21 @@ export interface User {
   avatar: string;
 }
 
+export interface ChatData {
+  id: number;
+  title: string;
+  avatar: string;
+  unread_count: number;
+  last_message: {
+    user: UserData;
+    time: string;
+    content: string;
+  };
+}
+
 interface StoreData {
   currentUser?: User;
+  chats?: ChatData[];
 }
 
 class Store extends EventBus {
@@ -51,11 +65,19 @@ export const withStore =
         store.on(StoreEvents.Updated, () => {
           const newState = mapStateToProps(store.getState());
 
+          console.log(isEqual(state, newState));
+
           if (!isEqual(state, newState)) {
             this.setProps({
-              ...state,
               ...newState,
             });
+            this.initChildren();
+
+            this.setProps({
+              ...newState,
+            });
+
+            state = newState;
           }
         });
       }

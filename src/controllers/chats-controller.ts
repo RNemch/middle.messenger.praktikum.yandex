@@ -1,47 +1,48 @@
-import UserApi, { UserData, UserPassword } from '../api/user';
+import ChatsApi from '../api/chats';
 import store from '../utils/store';
 
-class UserController {
-  private api: UserApi;
+class ChatsController {
+  private api: ChatsApi;
 
   constructor() {
-    this.api = new UserApi();
+    this.api = new ChatsApi();
   }
 
-  async profile(data: UserData) {
+  async addChat(data: { title: string }) {
     await this.api
-      .profile(data)
+      .addChat(data)
       .then((response) => {
         if (response.status !== 200) {
           throw new Error(response.response.reason);
         }
-        store.set('currentUser', response.response);
+        this.chats();
+      })
+      .catch((e) => {
+        alert(e);
+      });
+  }
+  async chats() {
+    await this.api
+      .chats()
+      .then((response) => {
+        if (response.status !== 200) {
+          throw new Error(response.response.reason);
+        }
+        store.set('chats', response.response);
       })
       .catch((e) => {
         alert(e);
       });
   }
 
-  async password(data: UserPassword) {
+  async deleteChat(data: { chatId: number }) {
     await this.api
-      .password(data)
+      .deleteChat(data)
       .then((response) => {
         if (response.status !== 200) {
           throw new Error(response.response.reason);
         }
-      })
-      .catch((e) => {
-        alert(e);
-      });
-  }
-
-  async search(data: { login: string }) {
-    await this.api
-      .search(data)
-      .then((response) => {
-        if (response.status !== 200) {
-          throw new Error(response.response.reason);
-        }
+        this.chats();
       })
       .catch((e) => {
         alert(e);
@@ -49,4 +50,4 @@ class UserController {
   }
 }
 
-export default new UserController();
+export default new ChatsController();

@@ -1,26 +1,96 @@
 import { Button } from '../../components/button';
 import { Chat } from '../../components/chat';
+import { ChatPreview } from '../../components/chat-preview';
+import { Form } from '../../components/form';
 import { Input } from '../../components/input';
+import { Modal } from '../../components/modal';
+import chatsController from '../../controllers/chats-controller';
+import userController from '../../controllers/user-controller';
 import Block from '../../utils/block';
 import { Router } from '../../utils/router';
-import { chats } from './const';
+import { ChatData, withStore } from '../../utils/store';
 import template from './index.pug';
 
-export class ChatsPage extends Block {
-  constructor() {
+class ChatsPage extends Block {
+  constructor(props: any) {
     super(
       { tagName: 'main' },
       {
+        chats: null,
         isChangeChat: false,
+        isAddChat: false,
+        ...props,
       },
     );
+
+    chatsController.chats();
   }
 
-  init() {
+  initChildren() {
+    if (this.props.chats)
+      this.children.chatsPreview = this.props.chats.map((data: ChatData) => {
+        const el = new ChatPreview({
+          id: data.id,
+          icon: data.avatar,
+          name: data.title,
+          lastMessage: data.last_message?.content,
+        });
+        el.setProps({
+          events: {
+            click: () => {
+              el.setProps({
+                active: 'active',
+              });
+              if (!Array.isArray(this.children.chat)) {
+                this.children.chat.setProps({
+                  chat: data,
+                });
+                (this.children.chat as Chat).initChildren();
+                this.children.chat.setProps({
+                  chat: data,
+                });
+              }
+              this.setProps({
+                isChangeChat: true,
+              });
+              if (Array.isArray(this.children.chatsPreview)) {
+                this.children.chatsPreview.forEach((element) => {
+                  if (
+                    element
+                      .getContent()!
+                      .querySelector('.chat-preview-container')!.id !==
+                    el.getContent()!.querySelector('.chat-preview-container')!
+                      .id
+                  ) {
+                    element.setProps({
+                      active: '',
+                    });
+                  }
+                });
+              }
+            },
+          },
+        });
+
+        return el;
+      });
+
     this.children.search = new Input({
-      name: 'searc',
+      name: 'search',
       type: 'text',
       placeholder: 'Поиск',
+      onChange: () => {
+        if (!Array.isArray(this.children.search)) {
+          const value = this.children.search
+            .getContent()
+            ?.querySelector('input')?.value;
+
+          value &&
+            userController
+              .search({ login: value })
+              .then((msg) => console.log(msg));
+        }
+      },
     });
 
     this.children.chat = new Chat({});
@@ -35,34 +105,41 @@ export class ChatsPage extends Block {
       },
     });
 
-    this.children.chats = chats.map((el) => {
-      el.setProps({
-        events: {
-          click: () => {
-            el.setProps({
-              active: 'active',
-            });
+    this.children.addChat = new Button({
+      tagButton: 'img',
+      name: 'add chat',
+      type: 'button',
+      src: '/image/add.svg',
+      onClick: () => {
+        this.setProps({
+          isAddChat: true,
+        });
+      },
+    });
+
+    this.children.modal = new Modal({
+      name: 'Создать чат',
+      content: new Form({
+        inputs: [
+          new Input({
+            name: 'title',
+            type: 'text',
+            placeholder: 'Название чата',
+          }),
+        ],
+        buttonProps: {
+          type: 'submit',
+          name: 'Сохранить',
+          className: 'modal-btn-submit',
+          callback: (data: any) => {
             this.setProps({
-              isChangeChat: true,
+              isAddChat: false,
             });
-            if (Array.isArray(this.children.chats)) {
-              this.children.chats.forEach((element) => {
-                if (
-                  element
-                    .getContent()!
-                    .querySelector('.chat-preview-container')!.id !==
-                  el.getContent()!.querySelector('.chat-preview-container')!.id
-                ) {
-                  element.setProps({
-                    active: '',
-                  });
-                }
-              });
-            }
+            chatsController.addChat(data);
+            chatsController.chats();
           },
         },
-      });
-      return el;
+      }),
     });
   }
 
@@ -70,3 +147,7 @@ export class ChatsPage extends Block {
     return this.compile(template, this.props);
   }
 }
+
+const Page = withStore((state) => ({ chats: state.chats }));
+
+export default Page(ChatsPage);

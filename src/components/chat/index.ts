@@ -1,11 +1,16 @@
+import chatsController from '../../controllers/chats-controller';
 import Block from '../../utils/block';
+import { ChatData } from '../../utils/store';
 import { Button } from '../button';
 import { ChatPreview } from '../chat-preview';
 import { Input } from '../input';
+import { Modal } from '../modal';
 import template from './index.pug';
 
 interface ChatProps {
   messages?: string[];
+  chat?: ChatData;
+  isSettings?: boolean;
 }
 
 export class Chat extends Block {
@@ -14,18 +19,20 @@ export class Chat extends Block {
       { tagName: 'div', className: 'chat' },
       {
         messages: new Array(''),
+        isSettings: false,
         ...props,
       },
     );
   }
 
-  init() {
-    this.children.head = new ChatPreview({
-      id: 'active',
-      icon: '',
-      name: 'Вадим',
-      lastMessage: '',
-    });
+  initChildren() {
+    if (this.props.chat)
+      this.children.head = new ChatPreview({
+        id: 'active',
+        icon: '',
+        name: this.props.chat.title,
+        lastMessage: '',
+      });
 
     this.children.addMessage = new Input({
       type: 'text',
@@ -66,6 +73,34 @@ export class Chat extends Block {
           console.log({ message: value });
         }
       },
+    });
+
+    this.children.settings = new Button({
+      tagButton: 'img',
+      type: 'button',
+      name: 'settings',
+      src: '/image/more_vert.svg',
+      className: 'settings-btn',
+      onClick: () => {
+        this.setProps({ isSettings: true });
+      },
+    });
+
+    this.children.settingsModal = new Modal({
+      content: new Button({
+        tagButton: 'img',
+        type: 'button',
+        name: 'Удалить чат',
+        displayName: 'Удалить чат',
+        src: '/image/delete_forever.svg',
+        // className: 'modal-btn-submit',
+        onClick: () => {
+          chatsController.deleteChat({ chatId: this.props.chat.id });
+          this.setProps({
+            isSettings: false,
+          });
+        },
+      }),
     });
   }
 

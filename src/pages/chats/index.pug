@@ -2,15 +2,16 @@ block content
   #content.content
     .sidebar
       .sidebar-top
-        img(src="/image/add.svg", alt="add")
+        !=addChat
         !=profileButton
       .search
         !=search
       .chat-list
-        each chatInfo in chats
-          != chatInfo
-    if !isChangeChat
-      .no-messages
-        p Выберите чат чтобы отправить сообщение
-    else
-      !=chat
+        if chatsPreview 
+          each el in chatsPreview
+            !=el
+
+
+    !=chat
+  if isAddChat 
+    !=modal

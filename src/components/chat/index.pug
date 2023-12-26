@@ -1,10 +1,18 @@
-.head 
-  !=head
-.messages
-  each message in messages
-    if message!=''
-      p
-        !=message
-form.add-message 
-  !=addMessage
-  !=pushMessage
+if !chat 
+  .no-messages
+        p Выберите чат чтобы отправить сообщение
+else
+  .head 
+    !=head
+    !=settings
+  .messages
+    each message in messages
+      if message!=''
+        p
+          !=message
+  form.add-message 
+    !=addMessage
+    !=pushMessage
+  
+  if isSettings 
+    !=settingsModal

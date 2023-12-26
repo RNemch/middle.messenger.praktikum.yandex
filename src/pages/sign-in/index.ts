@@ -4,7 +4,6 @@ import { Toggle } from '../../components/toggle';
 import AuthController from '../../controllers/auth-controller';
 import Block from '../../utils/block';
 import { Router } from '../../utils/router';
-import { withStore } from '../../utils/store';
 import { inputLogin } from './const';
 import template from './index.pug';
 
@@ -46,6 +45,4 @@ class SignInPage extends Block {
   }
 }
 
-const Page = withStore((state) => ({ ...state.currentUser }));
-
-export default Page(SignInPage);
+export default SignInPage;

@@ -1,4 +1,8 @@
 if tagButton==='button'
   button(type=type, class=className)= name
+else if tagButton==='img'
+  .btn-left-label
+    img(src=src, alt=name, class=className)
+    span= displayName
 else 
   a(class=className)= name

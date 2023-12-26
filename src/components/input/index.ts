@@ -1,4 +1,5 @@
 import Block from '../../utils/block';
+import store, { StoreEvents, User } from '../../utils/store';
 import { validation } from '../../utils/validation';
 import template from './index.pug';
 
@@ -8,8 +9,10 @@ interface InputProps {
   name: string;
   value?: string;
   message?: string;
+  onChange?: () => void;
   events?: {
-    click: () => void;
+    change?: () => void;
+    focusout?: () => void;
   };
 }
 
@@ -20,6 +23,8 @@ export class Input extends Block {
       {
         ...props,
         events: {
+          ...props.events,
+          change: props.onChange,
           focusout: () => {
             const elem = this.getContent();
             const input = elem!.querySelector('input');
@@ -32,6 +37,13 @@ export class Input extends Block {
         },
       },
     );
+    store.on(StoreEvents.Updated, () => {
+      if (props.name && props.name in store.getState().currentUser!) {
+        this.setProps({
+          value: store.getState().currentUser![props.name as keyof User],
+        });
+      }
+    });
   }
 
   render() {
