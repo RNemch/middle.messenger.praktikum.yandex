@@ -23,7 +23,7 @@ class ChatsPage extends Block {
       },
     );
 
-    chatsController.chats();
+    // chatsController.chats();
   }
 
   initChildren() {

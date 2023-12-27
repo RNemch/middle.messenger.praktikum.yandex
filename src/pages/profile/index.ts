@@ -10,7 +10,7 @@ import { Router } from '../../utils/router';
 import AuthController from '../../controllers/auth-controller';
 import { withStore } from '../../utils/store';
 import userController from '../../controllers/user-controller';
-import { LoadAvatar } from '../../components/load-avatar';
+import { Avatar } from '../../components/avatar';
 import { Modal } from '../../components/modal';
 import { InputFile } from '../../components/input-file';
 
@@ -94,7 +94,8 @@ class ProfilePage extends Block {
       },
     });
 
-    this.children.avatar = new LoadAvatar({
+    this.children.avatar = new Avatar({
+      avatar: this.props.avatar,
       onClick: () => {
         this.setProps({
           isLoadAvatar: true,

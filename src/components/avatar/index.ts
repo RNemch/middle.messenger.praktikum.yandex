@@ -1,7 +1,7 @@
 import Block from '../../utils/block';
 import template from './index.pug';
 
-interface LoadAvatarProps {
+interface AvatarProps {
   avatar?: string;
   onClick: () => void;
   events?: {
@@ -9,8 +9,8 @@ interface LoadAvatarProps {
   };
 }
 
-export class LoadAvatar extends Block {
-  constructor(props: LoadAvatarProps) {
+export class Avatar extends Block {
+  constructor(props: AvatarProps) {
     super(
       { tagName: 'div', className: 'profile-icon' },
       {

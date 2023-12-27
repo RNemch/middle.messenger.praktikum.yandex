@@ -1,4 +1,5 @@
 import AuthController from '../controllers/auth-controller';
+import chatsController from '../controllers/chats-controller';
 import Block from './block';
 import { Route } from './route';
 
@@ -54,7 +55,13 @@ export class Router {
 
     if (!['/', '/sign-up', '/404', '/500'].find((el) => el === pathname)) {
       AuthController.user()
-        .then(() => route!.render())
+        .then(() => {
+          if (pathname === '/messenger') {
+            chatsController.chats().then(() => route!.render());
+          } else {
+            route!.render();
+          }
+        })
         .catch(() => {
           route = this.getRoute('/');
           window.location.pathname = '/';

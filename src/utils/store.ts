@@ -66,14 +66,7 @@ export const withStore =
         store.on(StoreEvents.Updated, () => {
           const newState = mapStateToProps(store.getState());
 
-          console.log(isEqual(state, newState));
-
           if (!isEqual(state, newState)) {
-            this.setProps({
-              ...newState,
-            });
-            this.initChildren();
-
             this.setProps({
               ...newState,
             });
