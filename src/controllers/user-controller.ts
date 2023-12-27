@@ -12,23 +12,51 @@ class UserController {
   async profile(data: UserData) {
     const response = await this.api.profile(data);
 
-    httpErrorHandling(response);
+    try {
+      httpErrorHandling(response);
 
-    store.set('currentUser', response.response);
+      store.set('currentUser', response.response);
+    } catch (e) {
+      alert(e);
+    }
   }
 
   async password(data: UserPassword) {
     const response = await this.api.password(data);
 
-    httpErrorHandling(response);
+    try {
+      httpErrorHandling(response);
+    } catch (e) {
+      alert(e);
+    }
   }
 
   async search(data: { login: string }) {
     const response = await this.api.search({ ...data });
 
-    httpErrorHandling(response);
+    try {
+      httpErrorHandling(response);
 
-    return response.response;
+      return response.response;
+    } catch (e) {
+      alert(e);
+    }
+  }
+
+  async addAvatar(data: FormData) {
+    for (let [name, value] of data) {
+      console.log('data', name, value);
+    }
+
+    const response = await this.api.addAvatar(data);
+
+    try {
+      httpErrorHandling(response);
+
+      store.set('currentUser', response.response);
+    } catch (e) {
+      alert(e);
+    }
   }
 }
 

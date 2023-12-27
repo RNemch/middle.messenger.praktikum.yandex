@@ -12,44 +12,68 @@ class ChatsController {
   async addChat(data: { title: string }) {
     const response = await this.api.addChat(data);
 
-    httpErrorHandling(response);
+    try {
+      httpErrorHandling(response);
 
-    await this.chats();
+      await this.chats();
+    } catch (e) {
+      alert(e);
+    }
   }
   async chats() {
     const response = await this.api.chats();
 
-    httpErrorHandling(response);
+    try {
+      httpErrorHandling(response);
 
-    store.set('chats', response.response);
+      store.set('chats', response.response);
+    } catch (e) {
+      alert(e);
+    }
   }
 
   async deleteChat(data: { chatId: number }) {
     const response = await this.api.deleteChat(data);
 
-    httpErrorHandling(response);
+    try {
+      httpErrorHandling(response);
 
-    await this.chats();
+      await this.chats();
+    } catch (e) {
+      alert(e);
+    }
   }
 
   async addUser(data: { users: number[]; chatId: number }) {
     const response = await this.api.addUser(data);
 
-    httpErrorHandling(response);
+    try {
+      httpErrorHandling(response);
+    } catch (e) {
+      alert(e);
+    }
   }
 
   async getUsers(data: { id: number }) {
     const response = await this.api.getUsers(data);
 
-    httpErrorHandling(response);
+    try {
+      httpErrorHandling(response);
 
-    return response.response;
+      return response.response;
+    } catch (e) {
+      alert(e);
+    }
   }
 
   async delUser(data: { users: number[]; chatId: number }) {
     const response = await this.api.delUser(data);
 
-    httpErrorHandling(response);
+    try {
+      httpErrorHandling(response);
+    } catch (e) {
+      alert(e);
+    }
   }
 }
 

@@ -30,4 +30,8 @@ export default class UserApi extends BaseAPI {
   search(data: { login: string }): Promise<XMLHttpRequest> {
     return this.http.post('/search', data);
   }
+
+  addAvatar(data: FormData): Promise<XMLHttpRequest> {
+    return this.http.put('/profile/avatar', data, true);
+  }
 }

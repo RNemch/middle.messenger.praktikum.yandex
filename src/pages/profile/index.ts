@@ -10,6 +10,9 @@ import { Router } from '../../utils/router';
 import AuthController from '../../controllers/auth-controller';
 import { withStore } from '../../utils/store';
 import userController from '../../controllers/user-controller';
+import { LoadAvatar } from '../../components/load-avatar';
+import { Modal } from '../../components/modal';
+import { InputFile } from '../../components/input-file';
 
 const router = new Router();
 
@@ -89,6 +92,33 @@ class ProfilePage extends Block {
           userController.password(data).then(() => addActive('.profile-info'));
         },
       },
+    });
+
+    this.children.avatar = new LoadAvatar({
+      onClick: () => {
+        this.setProps({
+          isLoadAvatar: true,
+        });
+      },
+    });
+
+    this.children.loadAvatarModal = new Modal({
+      name: 'Загрузить картинку',
+      close: () => {
+        this.setProps({
+          isLoadAvatar: false,
+        });
+      },
+      content: [
+        new InputFile({
+          name: 'avatar',
+
+          // onSubmit: (event: any) => {
+          //   event.preventDefault();
+          //   console.log();
+          // },
+        }),
+      ],
     });
   }
 

@@ -10,8 +10,16 @@ interface Options {
   data?: any;
 }
 
-type HTTPMethod = (url: string, data?: unknown) => Promise<XMLHttpRequest>;
-type HTTPRequest = (url: string, option: Options) => Promise<XMLHttpRequest>;
+type HTTPMethod = (
+  url: string,
+  data?: unknown,
+  isFile?: boolean,
+) => Promise<XMLHttpRequest>;
+type HTTPRequest = (
+  url: string,
+  option: Options,
+  isFile?: boolean,
+) => Promise<XMLHttpRequest>;
 
 function queryStringify(data: Record<string, any>) {
   return Object.entries(data).reduce(
@@ -40,11 +48,15 @@ export class HTTPTransport {
     }
   };
 
-  put: HTTPMethod = (url, data) => {
-    return this.request(this.endpoint + url, {
-      method: METHODS.PUT,
-      data,
-    });
+  put: HTTPMethod = (url, data, isFile) => {
+    return this.request(
+      this.endpoint + url,
+      {
+        method: METHODS.PUT,
+        data,
+      },
+      isFile,
+    );
   };
 
   post: HTTPMethod = (url, data) => {
@@ -61,7 +73,7 @@ export class HTTPTransport {
     });
   };
 
-  request: HTTPRequest = (url, options) => {
+  request: HTTPRequest = (url, options, isFile = false) => {
     const { method, data } = options;
 
     return new Promise((resolve, reject) => {
@@ -76,13 +88,17 @@ export class HTTPTransport {
       xhr.onerror = reject;
       xhr.ontimeout = reject;
 
-      xhr.setRequestHeader('Content-Type', 'application/json');
+      if (!isFile) {
+        xhr.setRequestHeader('Content-Type', 'application/json');
+      }
 
       xhr.withCredentials = true;
       xhr.responseType = 'json';
 
       if (method === METHODS.GET || !data) {
         xhr.send();
+      } else if (isFile) {
+        xhr.send(data);
       } else {
         xhr.send(JSON.stringify(data));
       }

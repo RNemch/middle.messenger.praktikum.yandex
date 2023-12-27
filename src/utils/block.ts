@@ -23,7 +23,11 @@ class Block {
 
   private _meta: {
     props: any;
-    container?: { tagName: string; className?: string };
+    container?: {
+      tagName: string;
+      className?: string;
+      attributes?: { name: string; value: string }[];
+    };
   };
 
   /** JSDoc
@@ -33,7 +37,11 @@ class Block {
    * @returns {void}
    */
   constructor(
-    container?: { tagName: string; className?: string },
+    container?: {
+      tagName: string;
+      className?: string;
+      attributes?: { name: string; value: string }[];
+    },
     propsWithChildren: any = {},
   ) {
     const eventBus = new EventBus();
@@ -248,10 +256,19 @@ class Block {
     } as any);
   }
 
-  _createDocumentElement(container?: { tagName: string; className?: string }) {
+  _createDocumentElement(container?: {
+    tagName: string;
+    className?: string;
+    attributes?: { name: string; value: string }[];
+  }) {
     const elem = document.createElement(container ? container.tagName : 'div');
     if (container?.className) {
       elem.classList.add(container.className);
+    }
+    if (container?.attributes) {
+      container.attributes.forEach((el) => {
+        elem.setAttribute(el.name, el.value);
+      });
     }
     return elem;
   }
