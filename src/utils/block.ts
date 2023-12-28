@@ -148,7 +148,7 @@ class Block {
   }
 
   // Может переопределять пользователь, необязательно трогать
-  protected componentDidUpdate() {
+  protected componentDidUpdate(oldProps?: any, newProps?: any) {
     return true;
   }
 
@@ -188,6 +188,7 @@ class Block {
         );
         return;
       }
+      !component && console.log(this, component);
 
       contextAndStubs[name] = `<div data-id="${component.id}"></div>`;
     });

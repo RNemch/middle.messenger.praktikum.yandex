@@ -75,6 +75,10 @@ class ChatsController {
       alert(e);
     }
   }
+
+  async getToken(id: number) {
+    return this.api.getToken(id);
+  }
 }
 
 export default new ChatsController();

@@ -1,10 +1,11 @@
 import { Button } from '../../components/button';
-import { Chat } from '../../components/chat';
+import Chat from '../../components/chat';
 import { ChatPreview } from '../../components/chat-preview';
 import { Form } from '../../components/form';
 import { Input } from '../../components/input';
 import { Modal } from '../../components/modal';
 import chatsController from '../../controllers/chats-controller';
+import controller from '../../controllers/messages-controller';
 import userController from '../../controllers/user-controller';
 import Block from '../../utils/block';
 import { Router } from '../../utils/router';
@@ -37,15 +38,17 @@ class ChatsPage extends Block {
         });
         el.setProps({
           events: {
-            click: () => {
+            click: async () => {
               el.setProps({
                 active: 'active',
               });
+              const token = await chatsController.getToken(data.id);
+              await controller.connect(data.id, token);
               if (!Array.isArray(this.children.chat)) {
                 this.children.chat.setProps({
                   chat: data,
                 });
-                (this.children.chat as Chat).initChildren();
+                (this.children.chat as any).initChildren();
                 this.children.chat.setProps({
                   chat: data,
                 });

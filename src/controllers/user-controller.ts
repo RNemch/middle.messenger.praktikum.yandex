@@ -45,7 +45,6 @@ class UserController {
 
   async addAvatar(data: FormData) {
     for (let [name, value] of data) {
-      console.log('data', name, value);
     }
 
     const response = await this.api.addAvatar(data);

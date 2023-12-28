@@ -6,10 +6,14 @@ else
     !=head
     !=settings
   .messages
-    each message in messages
-      if message!=''
-        p
-          !=message
+    if (messages && chat.id in messages)
+      each message in messages[chat.id]
+        if message.user_id === userId
+          p.main
+            !=message.content
+        else 
+          p
+            !=message.content
   form.add-message 
     !=addMessage
     !=pushMessage

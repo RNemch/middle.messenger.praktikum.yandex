@@ -1,7 +1,8 @@
 import chatsController from '../../controllers/chats-controller';
 import userController from '../../controllers/user-controller';
+import controller from '../../controllers/messages-controller';
 import Block from '../../utils/block';
-import { User } from '../../utils/store';
+import { User, withStore } from '../../utils/store';
 import { Button } from '../button';
 import { ChatPreview } from '../chat-preview';
 import { Form } from '../form';
@@ -9,7 +10,7 @@ import { Input } from '../input';
 import { Modal } from '../modal';
 import template from './index.pug';
 
-export class Chat extends Block {
+class Chat extends Block {
   constructor(props: any) {
     super(
       { tagName: 'div', className: 'chat' },
@@ -29,25 +30,13 @@ export class Chat extends Block {
       const el = this.children.addMessage.getContent();
       const value = el!.querySelector('input')!.value;
 
-      let messages = this.props.messages;
-      if (Array.isArray(messages)) {
-        messages.push(value);
-      } else {
-        messages = [value];
-      }
-
-      if (!Array.isArray(this.children.messages))
-        this.setProps({
-          messages: messages,
-        });
+      controller.sendMessage(this.props.chat.id, value);
 
       this.children.addMessage.setProps({
         value: '',
       });
 
       el?.querySelector('input')?.focus();
-
-      console.log({ message: value });
     }
   };
 
@@ -143,7 +132,6 @@ export class Chat extends Block {
                     });
                   },
                   content: msg.map((el) => {
-                    console.log(el);
                     const button = new Button({
                       tagButton: 'a',
                       name: el.login,
@@ -238,3 +226,10 @@ export class Chat extends Block {
     return this.compile(template, this.props);
   }
 }
+
+const Page = withStore((store) => ({
+  messages: store.messages,
+  userId: store.currentUser?.id,
+}));
+
+export default Page(Chat);

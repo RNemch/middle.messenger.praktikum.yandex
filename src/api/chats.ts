@@ -28,4 +28,10 @@ export default class ChatsApi extends BaseAPI {
   delUser(data: { users: number[]; chatId: number }): Promise<XMLHttpRequest> {
     return this.http.delete('/users', data);
   }
+
+  async getToken(id: number): Promise<string> {
+    const response = await this.http.post(`/token/${id}`);
+
+    return response.response.token;
+  }
 }

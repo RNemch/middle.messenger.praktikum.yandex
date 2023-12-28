@@ -113,11 +113,6 @@ class ProfilePage extends Block {
       content: [
         new InputFile({
           name: 'avatar',
-
-          // onSubmit: (event: any) => {
-          //   event.preventDefault();
-          //   console.log();
-          // },
         }),
       ],
     });

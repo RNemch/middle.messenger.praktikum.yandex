@@ -1,4 +1,5 @@
 import { UserData } from '../api/user';
+import { Message } from '../controllers/messages-controller';
 import Block from './block';
 import { EventBus } from './event-bus';
 import { set, isEqual } from './helpers';
@@ -34,6 +35,7 @@ interface StoreData {
   currentUser?: User;
   chats?: ChatData[];
   users?: Omit<User, 'phone' | 'email'>;
+  messages?: Record<number, Message[]>;
 }
 
 class Store extends EventBus {
@@ -43,7 +45,7 @@ class Store extends EventBus {
     return this.state;
   }
 
-  public set(path: keyof StoreData, value: unknown) {
+  public set(path: string, value: unknown) {
     set(this.state, path, value);
 
     this.emit(StoreEvents.Updated);
@@ -66,7 +68,7 @@ export const withStore =
         store.on(StoreEvents.Updated, () => {
           const newState = mapStateToProps(store.getState());
 
-          if (!isEqual(state, newState)) {
+          if (!isEqual(state, newState) || 'messages' in newState) {
             this.setProps({
               ...newState,
             });
