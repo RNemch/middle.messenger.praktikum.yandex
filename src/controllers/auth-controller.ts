@@ -12,27 +12,29 @@ class AuthController {
 
   async signIn(data: SignInData) {
     const response = await this.api.signIn(data);
+    const router = new Router();
 
     try {
       httpErrorHandling(response);
 
-      const router = new Router();
       router.go('/messenger');
     } catch (e) {
-      alert(e);
+      if (e === 'User already in system') router.go('/messenger');
+      else alert(e);
     }
   }
 
   async signUp(data: SignUpData) {
     const response = await this.api.signUp(data);
+    const router = new Router();
 
     try {
       httpErrorHandling(response);
 
-      const router = new Router();
       router.go('/messenger');
     } catch (e) {
-      alert(e);
+      if (e === 'User already in system') router.go('/messenger');
+      else alert(e);
     }
   }
 
