@@ -1,10 +1,11 @@
 import { Password } from '../../components/password';
+import { User } from '../../utils/store';
 
 interface Data {
   label: string;
   value: string;
   type: 'email' | 'text' | 'tel' | 'email' | 'password';
-  name: string;
+  name: keyof User;
 }
 
 export const name = 'Иван Сидоров';

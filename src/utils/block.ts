@@ -1,7 +1,7 @@
 import { EventBus } from './event-bus';
 import { nanoid } from 'nanoid';
 
-class Block<Props extends Record<string, any> = any> {
+class Block {
   static EVENTS = {
     INIT: 'init',
     FLOW_CDM: 'flow:component-did-mount',
@@ -11,7 +11,7 @@ class Block<Props extends Record<string, any> = any> {
 
   public id: string = nanoid(6);
 
-  protected props: Props;
+  protected props: any;
 
   protected refs: Record<string, Block> = {};
 
@@ -23,7 +23,11 @@ class Block<Props extends Record<string, any> = any> {
 
   private _meta: {
     props: any;
-    container: { tagName: string; className?: string };
+    container?: {
+      tagName: string;
+      className?: string;
+      attributes?: { name: string; value: string }[];
+    };
   };
 
   /** JSDoc
@@ -33,7 +37,11 @@ class Block<Props extends Record<string, any> = any> {
    * @returns {void}
    */
   constructor(
-    container: { tagName: string; className?: string },
+    container?: {
+      tagName: string;
+      className?: string;
+      attributes?: { name: string; value: string }[];
+    },
     propsWithChildren: any = {},
   ) {
     const eventBus = new EventBus();
@@ -47,6 +55,7 @@ class Block<Props extends Record<string, any> = any> {
     this.children = children;
     this.props = this._makePropsProxy(props);
 
+    this.initChildren();
     this.eventBus = () => eventBus;
 
     this._registerEvents(eventBus);
@@ -99,6 +108,8 @@ class Block<Props extends Record<string, any> = any> {
     eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
   }
 
+  protected initChildren() {}
+
   private _init() {
     this._element = this._createDocumentElement(this._meta.container);
 
@@ -107,7 +118,9 @@ class Block<Props extends Record<string, any> = any> {
     this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
   }
 
-  protected init() {}
+  protected init() {
+    this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
+  }
 
   _componentDidMount() {
     this.componentDidMount();
@@ -139,7 +152,7 @@ class Block<Props extends Record<string, any> = any> {
     return true;
   }
 
-  setProps = (nextProps: Props) => {
+  setProps = (nextProps: any) => {
     if (!nextProps) {
       return;
     }
@@ -243,10 +256,19 @@ class Block<Props extends Record<string, any> = any> {
     } as any);
   }
 
-  _createDocumentElement(container: { tagName: string; className?: string }) {
-    const elem = document.createElement(container.tagName);
-    if (container.className) {
+  _createDocumentElement(container?: {
+    tagName: string;
+    className?: string;
+    attributes?: { name: string; value: string }[];
+  }) {
+    const elem = document.createElement(container ? container.tagName : 'div');
+    if (container?.className) {
       elem.classList.add(container.className);
+    }
+    if (container?.attributes) {
+      container.attributes.forEach((el) => {
+        elem.setAttribute(el.name, el.value);
+      });
     }
     return elem;
   }

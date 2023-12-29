@@ -13,7 +13,7 @@ interface FormProps {
     type: string;
     name: string;
     className: string;
-    callback?: () => void;
+    callback?: (data?: DataForm) => void;
   };
 }
 
@@ -31,7 +31,7 @@ export class Form extends Block {
     );
   }
 
-  init() {
+  initChildren() {
     this.children.button = new Button({
       ...this.props.buttonProps,
       onClick: (event: any) => {
@@ -41,7 +41,7 @@ export class Form extends Block {
         this.getContent()
           ?.querySelectorAll('div.input')
           .forEach((el) => {
-            isSuccess = validation(el).verify;
+            isSuccess = validation(el).verify && isSuccess;
 
             const input = el.querySelector('input');
             data[`${input!.name}`] = input!.value;
@@ -50,7 +50,7 @@ export class Form extends Block {
         if (isSuccess) {
           console.log(data);
           if (this.props.buttonProps.callback) {
-            this.props.buttonProps.callback();
+            this.props.buttonProps.callback(data);
           }
         }
       },

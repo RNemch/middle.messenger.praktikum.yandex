@@ -1,10 +1,28 @@
-.head 
-  !=head
-.messages
-  each message in messages
-    if message!=''
-      p
-        !=message
-form.add-message 
-  !=addMessage
-  !=pushMessage
+if !chat 
+  .no-messages
+        p Выберите чат чтобы отправить сообщение
+else
+  .head 
+    !=head
+    !=settings
+  .messages
+    if (messages && chat.id in messages)
+      each message in messages[chat.id]
+        if message.user_id === userId
+          p.main
+            !=message.content
+        else 
+          p
+            !=message.content
+  form.add-message 
+    !=addMessage
+    !=pushMessage
+  
+  if isSettings 
+    !=settingsModal
+  if isAddUser 
+    !=addUserModal
+  if isUsers 
+    !=users
+  if isDelUserList
+    !=delUsers
