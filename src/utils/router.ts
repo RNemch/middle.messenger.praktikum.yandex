@@ -59,6 +59,7 @@ export class Router {
     if (!['/', '/sign-up', '/404', '/500'].find((el) => el === pathname)) {
       AuthController.user()
         .then(() => {
+          console.log('true');
           if (pathname === '/messenger') {
             chatsController.chats().then(() => route!.render());
           } else {
@@ -66,6 +67,7 @@ export class Router {
           }
         })
         .catch(() => {
+          console.log('error');
           route = this.getRoute('/');
           window.location.pathname = '/';
           this._currentRoute!.leave();

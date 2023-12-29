@@ -58,6 +58,7 @@ class AuthController {
       store.set('currentUser', response.response);
     } catch (e) {
       alert(e);
+      throw new Error(e as string);
     }
   }
 }
