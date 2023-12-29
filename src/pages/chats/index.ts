@@ -23,8 +23,6 @@ class ChatsPage extends Block {
         ...props,
       },
     );
-
-    // chatsController.chats();
   }
 
   initChildren() {
@@ -146,7 +144,6 @@ class ChatsPage extends Block {
                   isAddChat: false,
                 }),
               );
-              // chatsController.chats();
             },
           },
         }),

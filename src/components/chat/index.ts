@@ -35,12 +35,16 @@ class Chat extends Block {
       this.children.addMessage.setProps({
         value: '',
       });
-
-      el?.querySelector('input')?.focus();
     }
   };
 
   initChildren() {
+    setTimeout(() => {
+      const messages = this.getContent()?.getElementsByClassName('messages');
+
+      messages![0] && messages![0].scrollTo(0, messages![0].scrollHeight);
+    });
+
     if (this.props.chat)
       this.children.head = new ChatPreview({
         id: 'active',
@@ -91,14 +95,12 @@ class Chat extends Block {
           name: 'Удалить чат',
           displayName: 'Удалить чат',
           src: '/image/delete_forever.svg',
-          onClick: () => {
-            chatsController
-              .deleteChat({ chatId: this.props.chat.id })
-              .then(() =>
-                this.setProps({
-                  isSettings: false,
-                }),
-              );
+          onClick: async () => {
+            await chatsController.deleteChat({ chatId: this.props.chat.id });
+
+            this.setProps({
+              isSettings: false,
+            });
           },
         }),
         new Button({

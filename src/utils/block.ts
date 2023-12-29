@@ -148,7 +148,7 @@ class Block {
   }
 
   // Может переопределять пользователь, необязательно трогать
-  protected componentDidUpdate(oldProps?: any, newProps?: any) {
+  protected componentDidUpdate() {
     return true;
   }
 

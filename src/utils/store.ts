@@ -73,6 +73,9 @@ export const withStore =
               ...newState,
             });
 
+            this.initChildren();
+            this.init();
+
             state = newState;
           }
         });
