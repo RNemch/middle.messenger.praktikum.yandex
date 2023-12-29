@@ -5,10 +5,13 @@ import { Route } from './route';
 
 export class Router {
   private static __instance: Router;
+
   private _currentRoute: Route | null;
+
   private _rootQuery?: string;
 
   private _routes: Route[];
+
   private _history: History;
 
   constructor(rootQuery?: string) {
@@ -89,12 +92,12 @@ export class Router {
   }
 
   getRoute(pathname: string) {
-    const route = this._routes.find((route) => route.match(pathname));
+    const route = this._routes.find((el) => el.match(pathname));
     if (route) {
       return route;
     } else {
       window.location.pathname = '/404';
-      return this._routes.find((route) => route.match('/404'));
+      return this._routes.find((el) => el.match('/404'));
     }
   }
 }

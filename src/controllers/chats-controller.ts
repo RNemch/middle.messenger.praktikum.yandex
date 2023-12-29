@@ -20,6 +20,7 @@ class ChatsController {
       alert(e);
     }
   }
+
   async chats() {
     const response = await this.api.chats();
 

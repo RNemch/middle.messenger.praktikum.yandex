@@ -42,7 +42,9 @@ class Chat extends Block {
     setTimeout(() => {
       const messages = this.getContent()?.getElementsByClassName('messages');
 
-      messages![0] && messages![0].scrollTo(0, messages![0].scrollHeight);
+      if (messages![0]) {
+        messages![0].scrollTo(0, messages![0].scrollHeight);
+      }
     });
 
     if (this.props.chat)

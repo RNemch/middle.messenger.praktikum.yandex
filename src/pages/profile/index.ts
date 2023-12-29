@@ -76,8 +76,8 @@ class ProfilePage extends Block {
         type: 'submit',
         name: 'Сохранить',
         className: 'profile-btn',
-        callback: (data: any) => {
-          userController.profile(data).then(() => addActive('.profile-info'));
+        callback: (el: any) => {
+          userController.profile(el).then(() => addActive('.profile-info'));
         },
       },
     });
@@ -88,8 +88,8 @@ class ProfilePage extends Block {
         type: 'submit',
         name: 'Cохранить',
         className: 'profile-btn',
-        callback: (data: any) => {
-          userController.password(data).then(() => addActive('.profile-info'));
+        callback: (el: any) => {
+          userController.password(el).then(() => addActive('.profile-info'));
         },
       },
     });

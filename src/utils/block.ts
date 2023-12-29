@@ -188,7 +188,6 @@ class Block {
         );
         return;
       }
-      !component && console.log(this, component);
 
       contextAndStubs[name] = `<div data-id="${component.id}"></div>`;
     });

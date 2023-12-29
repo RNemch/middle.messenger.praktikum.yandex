@@ -15,8 +15,11 @@ export type BlockInheritor = new (
 
 export class Route {
   private _pathname: string;
+
   private _blockClass: typeof Block;
+
   private _block: Block | null;
+
   private _props: RouteProps;
 
   constructor(pathname: string, view: typeof Block, props: RouteProps) {

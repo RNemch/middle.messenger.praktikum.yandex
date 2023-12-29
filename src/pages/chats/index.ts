@@ -86,10 +86,9 @@ class ChatsPage extends Block {
             .getContent()
             ?.querySelector('input')?.value;
 
-          value &&
-            userController
-              .search({ login: value })
-              .then((msg) => console.log(msg));
+          userController
+            .search({ login: value! })
+            .then((msg) => console.log(msg));
         }
       },
     });

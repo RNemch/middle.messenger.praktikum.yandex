@@ -30,6 +30,7 @@ function queryStringify(data: Record<string, any>) {
 
 export class HTTPTransport {
   endpoint: string;
+
   private API_URL = 'https://ya-praktikum.tech/api/v2';
 
   constructor(endpoint: string) {
