@@ -5,6 +5,6 @@ export const httpErrorHandling = (response: XMLHttpRequest) => {
   if (response.status === 500) {
     router.go('/500');
   } else if (response.status !== 200) {
-    throw new Error(response.response.reason);
+    throw response.response.reason;
   }
 };

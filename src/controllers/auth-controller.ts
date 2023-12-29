@@ -19,6 +19,7 @@ class AuthController {
 
       router.go('/messenger');
     } catch (e) {
+      console.log(e, e === 'User already in system');
       if (e === 'User already in system') router.go('/messenger');
       else alert(e);
     }
