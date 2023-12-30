@@ -77,7 +77,9 @@ class ProfilePage extends Block {
         name: 'Сохранить',
         className: 'profile-btn',
         callback: (el: any) => {
-          userController.profile(el).then(() => addActive('.profile-info'));
+          userController
+            .changeProfile(el)
+            .then(() => addActive('.profile-info'));
         },
       },
     });
@@ -89,7 +91,9 @@ class ProfilePage extends Block {
         name: 'Cохранить',
         className: 'profile-btn',
         callback: (el: any) => {
-          userController.password(el).then(() => addActive('.profile-info'));
+          userController
+            .changePassword(el)
+            .then(() => addActive('.profile-info'));
         },
       },
     });
@@ -113,6 +117,21 @@ class ProfilePage extends Block {
       content: [
         new InputFile({
           name: 'avatar',
+          onSubmit: (event?: Event) => {
+            event?.preventDefault();
+            if (!Array.isArray(this.children.loadAvatarModal)) {
+              const form = this.children.loadAvatarModal
+                .getContent()!
+                .querySelector('form') as HTMLFormElement;
+              const formData = new FormData(form);
+
+              userController.addAvatar(formData);
+
+              this.setProps({
+                isLoadAvatar: false,
+              });
+            }
+          },
         }),
       ],
     });

@@ -1,4 +1,3 @@
-import userController from '../../controllers/user-controller';
 import Block from '../../utils/block';
 import template from './index.pug';
 
@@ -6,9 +5,9 @@ interface InputFileProps {
   title?: string;
   name: string;
   accept?: string;
-  onSubmit?: (event?: any) => void;
+  onSubmit?: (event?: Event) => void;
   events?: {
-    submit?: (event?: any) => void;
+    submit?: (event?: Event) => void;
   };
 }
 
@@ -26,13 +25,7 @@ export class InputFile extends Block {
       {
         ...props,
         events: {
-          submit: (event: any) => {
-            event.preventDefault();
-            const form = this.getContent() as HTMLFormElement;
-            const formData = new FormData(form);
-
-            userController.addAvatar(formData);
-          },
+          submit: props.onSubmit,
         },
       },
     );

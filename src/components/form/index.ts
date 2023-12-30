@@ -34,7 +34,7 @@ export class Form extends Block {
   initChildren() {
     this.children.button = new Button({
       ...this.props.buttonProps,
-      onClick: (event: any) => {
+      onClick: (event: Event) => {
         event.preventDefault();
         const data: DataForm = {};
         let isSuccess = true;

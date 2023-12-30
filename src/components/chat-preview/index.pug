@@ -1,7 +1,7 @@
 .chat-preview-container(id=id, class=active)
   .chat-icon
     if icon
-      img(src=icon, alt=name)
+      img(src=`https://ya-praktikum.tech/api/v2/resources${icon}`, alt=name)
     else
       p= name 
   .chat-info

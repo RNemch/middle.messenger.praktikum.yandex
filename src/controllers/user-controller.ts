@@ -9,7 +9,7 @@ class UserController {
     this.api = new UserApi();
   }
 
-  async profile(data: UserData) {
+  async changeProfile(data: UserData) {
     const response = await this.api.profile(data);
 
     try {
@@ -21,7 +21,7 @@ class UserController {
     }
   }
 
-  async password(data: UserPassword) {
+  async changePassword(data: UserPassword) {
     const response = await this.api.password(data);
 
     try {

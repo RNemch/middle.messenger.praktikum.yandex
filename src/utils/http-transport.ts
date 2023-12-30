@@ -37,7 +37,7 @@ export class HTTPTransport {
     this.endpoint = `${this.API_URL}${endpoint}`;
   }
 
-  get: HTTPMethod = (url, data?) => {
+  get: HTTPMethod = (url, data) => {
     if (data) {
       return this.request(this.endpoint + url + queryStringify(data), {
         method: METHODS.GET,

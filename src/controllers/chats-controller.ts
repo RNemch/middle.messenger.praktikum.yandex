@@ -15,13 +15,13 @@ class ChatsController {
     try {
       httpErrorHandling(response);
 
-      await this.chats();
+      await this.getChats();
     } catch (e) {
       alert(e);
     }
   }
 
-  async chats() {
+  async getChats() {
     const response = await this.api.chats();
 
     try {
@@ -39,7 +39,7 @@ class ChatsController {
     try {
       httpErrorHandling(response);
 
-      await this.chats();
+      await this.getChats();
     } catch (e) {
       alert(e);
     }
@@ -72,6 +72,17 @@ class ChatsController {
 
     try {
       httpErrorHandling(response);
+    } catch (e) {
+      alert(e);
+    }
+  }
+
+  async addAvatar(data: FormData) {
+    const response = await this.api.addAvatar(data);
+
+    try {
+      httpErrorHandling(response);
+      this.getChats();
     } catch (e) {
       alert(e);
     }

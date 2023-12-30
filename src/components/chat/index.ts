@@ -9,6 +9,8 @@ import { Form } from '../form';
 import { Input } from '../input';
 import { Modal } from '../modal';
 import template from './index.pug';
+import { validation } from '../../utils/validation';
+import { InputFile } from '../input-file';
 
 class Chat extends Block {
   constructor(props: any) {
@@ -20,6 +22,7 @@ class Chat extends Block {
         isAddUser: false,
         isUsers: false,
         isDelUserList: false,
+        isAddIcon: false,
         ...props,
       },
     );
@@ -30,11 +33,15 @@ class Chat extends Block {
       const el = this.children.addMessage.getContent();
       const value = el!.querySelector('input')!.value;
 
-      controller.sendMessage(this.props.chat.id, value);
+      const resultValidation = validation(el!);
 
-      this.children.addMessage.setProps({
-        value: '',
-      });
+      if (resultValidation.verify) {
+        controller.sendMessage(this.props.chat.id, value);
+
+        this.children.addMessage.setProps({
+          value: '',
+        });
+      }
     }
   };
 
@@ -67,8 +74,8 @@ class Chat extends Block {
     this.children.pushMessage = new Button({
       type: 'submit',
       name: '>',
-      onClick: (event: any) => {
-        event.preventDefault();
+      onClick: (event?: Event) => {
+        event?.preventDefault();
         this.addMessage();
       },
     });
@@ -82,6 +89,36 @@ class Chat extends Block {
       onClick: () => {
         this.setProps({ isSettings: true });
       },
+    });
+
+    this.children.addIcon = new Modal({
+      name: 'Изменить иконку чата',
+      close: () => {
+        this.setProps({
+          isAddIcon: false,
+        });
+      },
+      content: [
+        new InputFile({
+          name: 'avatar',
+          onSubmit: (event?: Event) => {
+            event?.preventDefault();
+            if (!Array.isArray(this.children.addIcon)) {
+              const form = this.children.addIcon
+                .getContent()!
+                .querySelector('form') as HTMLFormElement;
+              const formData = new FormData(form);
+              formData.append('chatId', this.props.chat.id);
+
+              chatsController.addAvatar(formData);
+
+              this.setProps({
+                isAddIcon: false,
+              });
+            }
+          },
+        }),
+      ],
     });
 
     this.children.settingsModal = new Modal({
@@ -159,6 +196,19 @@ class Chat extends Block {
                   isSettings: false,
                 });
               });
+          },
+        }),
+        new Button({
+          tagButton: 'img',
+          type: 'button',
+          name: 'Изменить иконку чата',
+          displayName: 'Изменить иконку чата',
+          src: '/image/add_photo_alternate.svg',
+          onClick: () => {
+            this.setProps({
+              isSettings: false,
+              isAddIcon: true,
+            });
           },
         }),
       ],
