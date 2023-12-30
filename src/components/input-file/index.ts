@@ -30,6 +30,7 @@ export class InputFile extends Block {
       },
     );
   }
+
   render() {
     return this.compile(template, this.props);
   }
