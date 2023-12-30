@@ -15,13 +15,13 @@ class ChatsController {
     try {
       httpErrorHandling(response);
 
-      await this.chats();
+      await this.getChats();
     } catch (e) {
       alert(e);
     }
   }
 
-  async chats() {
+  async getChats() {
     const response = await this.api.chats();
 
     try {
@@ -39,7 +39,7 @@ class ChatsController {
     try {
       httpErrorHandling(response);
 
-      await this.chats();
+      await this.getChats();
     } catch (e) {
       alert(e);
     }

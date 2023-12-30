@@ -27,7 +27,7 @@ export class Input extends Block {
         events: {
           ...props.events,
           change: props.onChange,
-          keypress: (event: any) => {
+          keypress: (event: KeyboardEvent) => {
             if (event.key === 'Enter') {
               return props.onEnter;
             }

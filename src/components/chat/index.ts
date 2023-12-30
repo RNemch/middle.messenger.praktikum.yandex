@@ -9,6 +9,7 @@ import { Form } from '../form';
 import { Input } from '../input';
 import { Modal } from '../modal';
 import template from './index.pug';
+import { validation } from '../../utils/validation';
 
 class Chat extends Block {
   constructor(props: any) {
@@ -30,11 +31,15 @@ class Chat extends Block {
       const el = this.children.addMessage.getContent();
       const value = el!.querySelector('input')!.value;
 
-      controller.sendMessage(this.props.chat.id, value);
+      const resultValidation = validation(el!);
 
-      this.children.addMessage.setProps({
-        value: '',
-      });
+      if (resultValidation.verify) {
+        controller.sendMessage(this.props.chat.id, value);
+
+        this.children.addMessage.setProps({
+          value: '',
+        });
+      }
     }
   };
 
@@ -67,8 +72,8 @@ class Chat extends Block {
     this.children.pushMessage = new Button({
       type: 'submit',
       name: '>',
-      onClick: (event: any) => {
-        event.preventDefault();
+      onClick: (event?: Event) => {
+        event?.preventDefault();
         this.addMessage();
       },
     });

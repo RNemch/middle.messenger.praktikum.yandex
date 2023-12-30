@@ -51,7 +51,7 @@ class AuthController {
     }
   }
 
-  async user() {
+  async getUser() {
     const response = await this.api.user();
 
     try {

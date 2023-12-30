@@ -8,9 +8,9 @@ interface ButtonProps {
   src?: string;
   displayName?: string;
   className?: string;
-  onClick?: (event?: any) => void;
+  onClick?: (event?: Event) => void;
   events?: {
-    click: (event?: any) => void;
+    click: (event?: Event) => void;
   };
 }
 

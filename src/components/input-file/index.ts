@@ -6,9 +6,9 @@ interface InputFileProps {
   title?: string;
   name: string;
   accept?: string;
-  onSubmit?: (event?: any) => void;
+  onSubmit?: (event?: Event) => void;
   events?: {
-    submit?: (event?: any) => void;
+    submit?: (event?: Event) => void;
   };
 }
 
@@ -26,7 +26,7 @@ export class InputFile extends Block {
       {
         ...props,
         events: {
-          submit: (event: any) => {
+          submit: (event: Event) => {
             event.preventDefault();
             const form = this.getContent() as HTMLFormElement;
             const formData = new FormData(form);

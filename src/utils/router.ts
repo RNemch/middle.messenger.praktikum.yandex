@@ -57,10 +57,10 @@ export class Router {
     this._currentRoute = route!;
 
     if (!['/', '/sign-up', '/404', '/500'].find((el) => el === pathname)) {
-      AuthController.user()
+      AuthController.getUser()
         .then(() => {
           if (pathname === '/messenger') {
-            chatsController.chats().then(() => route!.render());
+            chatsController.getChats().then(() => route!.render());
           } else {
             route!.render();
           }

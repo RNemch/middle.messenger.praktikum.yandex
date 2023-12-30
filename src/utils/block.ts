@@ -1,7 +1,13 @@
 import { EventBus } from './event-bus';
 import { nanoid } from 'nanoid';
 
-class Block {
+interface IContainer {
+  tagName: string;
+  className?: string;
+  attributes?: { name: string; value: string }[];
+}
+
+class Block<Props extends Record<string, any> = any> {
   static EVENTS = {
     INIT: 'init',
     FLOW_CDM: 'flow:component-did-mount',
@@ -11,7 +17,7 @@ class Block {
 
   public id: string = nanoid(6);
 
-  protected props: any;
+  protected props: Props;
 
   protected refs: Record<string, Block> = {};
 
@@ -23,11 +29,7 @@ class Block {
 
   private _meta: {
     props: any;
-    container?: {
-      tagName: string;
-      className?: string;
-      attributes?: { name: string; value: string }[];
-    };
+    container?: IContainer;
   };
 
   /** JSDoc
