@@ -1,4 +1,3 @@
-import userController from '../../controllers/user-controller';
 import Block from '../../utils/block';
 import template from './index.pug';
 
@@ -26,18 +25,11 @@ export class InputFile extends Block {
       {
         ...props,
         events: {
-          submit: (event: Event) => {
-            event.preventDefault();
-            const form = this.getContent() as HTMLFormElement;
-            const formData = new FormData(form);
-
-            userController.addAvatar(formData);
-          },
+          submit: props.onSubmit,
         },
       },
     );
   }
-
   render() {
     return this.compile(template, this.props);
   }

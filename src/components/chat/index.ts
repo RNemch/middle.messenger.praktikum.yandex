@@ -10,6 +10,7 @@ import { Input } from '../input';
 import { Modal } from '../modal';
 import template from './index.pug';
 import { validation } from '../../utils/validation';
+import { InputFile } from '../input-file';
 
 class Chat extends Block {
   constructor(props: any) {
@@ -21,6 +22,7 @@ class Chat extends Block {
         isAddUser: false,
         isUsers: false,
         isDelUserList: false,
+        isAddIcon: false,
         ...props,
       },
     );
@@ -166,69 +168,111 @@ class Chat extends Block {
               });
           },
         }),
-      ],
-    });
-
-    this.children.addUserModal = new Modal({
-      name: 'Добавить пользователя в чат',
-      close: () => {
-        this.setProps({
-          isAddUser: false,
-        });
-      },
-      content: [
-        new Form({
-          inputs: [
-            new Input({
-              type: 'text',
-              name: 'login',
-              placeholder: 'Поиск пользователя',
-            }),
-          ],
-          buttonProps: {
-            type: 'button',
-            name: 'search',
-            className: 'modal-btn-submit',
-            callback: (data: any) => {
-              userController
-                .search({ ...data })
-                .then((msg: Omit<User, 'phone' | 'email'>[]) => {
-                  this.children.users = new Modal({
-                    name: 'Добавить пользователя в чат',
-                    close: () => {
-                      this.setProps({
-                        isUsers: false,
-                      });
-                    },
-                    content: msg.map((el) => {
-                      const button = new Button({
-                        tagButton: 'a',
-                        name: el.login,
-                        type: 'button',
-                        onClick: () => {
-                          chatsController.addUser({
-                            users: [el.id],
-                            chatId: this.props.chat.id,
-                          });
-                          this.setProps({
-                            isUsers: false,
-                          });
-                        },
-                      });
-
-                      return button;
-                    }),
-                  });
-                  this.setProps({
-                    isAddUser: false,
-                    isUsers: true,
-                  });
-                });
-            },
+        new Button({
+          tagButton: 'img',
+          type: 'button',
+          name: 'Изменить иконку чата',
+          displayName: 'Изменить иконку чата',
+          src: '/image/add_photo_alternate.svg',
+          onClick: () => {
+            this.setProps({
+              isSettings: false,
+              isAddIcon: true,
+            });
           },
         }),
       ],
     });
+
+    (this.children.addIcon = new Modal({
+      name: 'Изменить иконку чата',
+      close: () => {
+        this.setProps({
+          isAddIcon: false,
+        });
+      },
+      content: [
+        new InputFile({
+          name: 'avatar',
+          onSubmit: (event?: Event) => {
+            event?.preventDefault();
+            if (!Array.isArray(this.children.addIcon)) {
+              const form = this.children.addIcon
+                .getContent()!
+                .querySelector('form') as HTMLFormElement;
+              const formData = new FormData(form);
+              formData.append('chatId', this.props.chat.id);
+
+              chatsController.addAvatar(formData);
+
+              this.setProps({
+                isAddIcon: false,
+              });
+            }
+          },
+        }),
+      ],
+    })),
+      (this.children.addUserModal = new Modal({
+        name: 'Добавить пользователя в чат',
+        close: () => {
+          this.setProps({
+            isAddUser: false,
+          });
+        },
+        content: [
+          new Form({
+            inputs: [
+              new Input({
+                type: 'text',
+                name: 'login',
+                placeholder: 'Поиск пользователя',
+              }),
+            ],
+            buttonProps: {
+              type: 'button',
+              name: 'search',
+              className: 'modal-btn-submit',
+              callback: (data: any) => {
+                userController
+                  .search({ ...data })
+                  .then((msg: Omit<User, 'phone' | 'email'>[]) => {
+                    this.children.users = new Modal({
+                      name: 'Добавить пользователя в чат',
+                      close: () => {
+                        this.setProps({
+                          isUsers: false,
+                        });
+                      },
+                      content: msg.map((el) => {
+                        const button = new Button({
+                          tagButton: 'a',
+                          name: el.login,
+                          type: 'button',
+                          onClick: () => {
+                            chatsController.addUser({
+                              users: [el.id],
+                              chatId: this.props.chat.id,
+                            });
+                            this.setProps({
+                              isUsers: false,
+                            });
+                          },
+                        });
+
+                        return button;
+                      }),
+                    });
+                    this.setProps({
+                      isAddUser: false,
+                      isUsers: true,
+                    });
+                  });
+              },
+            },
+          }),
+        ],
+      }));
   }
 
   render() {

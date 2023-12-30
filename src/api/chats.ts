@@ -29,6 +29,10 @@ export default class ChatsApi extends BaseAPI {
     return this.http.delete('/users', data);
   }
 
+  addAvatar(data: FormData): Promise<XMLHttpRequest> {
+    return this.http.put('/avatar', data, true);
+  }
+
   async getToken(id: number): Promise<string> {
     const response = await this.http.post(`/token/${id}`);
 

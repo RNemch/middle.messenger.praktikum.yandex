@@ -117,6 +117,21 @@ class ProfilePage extends Block {
       content: [
         new InputFile({
           name: 'avatar',
+          onSubmit: (event?: Event) => {
+            event?.preventDefault();
+            if (!Array.isArray(this.children.loadAvatarModal)) {
+              const form = this.children.loadAvatarModal
+                .getContent()!
+                .querySelector('form') as HTMLFormElement;
+              const formData = new FormData(form);
+
+              userController.addAvatar(formData);
+
+              this.setProps({
+                isLoadAvatar: false,
+              });
+            }
+          },
         }),
       ],
     });

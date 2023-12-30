@@ -77,6 +77,17 @@ class ChatsController {
     }
   }
 
+  async addAvatar(data: FormData) {
+    const response = await this.api.addAvatar(data);
+
+    try {
+      httpErrorHandling(response);
+      this.getChats();
+    } catch (e) {
+      alert(e);
+    }
+  }
+
   async getToken(id: number) {
     return this.api.getToken(id);
   }
