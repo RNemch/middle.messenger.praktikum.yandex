@@ -4,11 +4,8 @@ block content
     .sidebar-profile
       !=chatsButton
     .profile
-      .profile-icon
-        img(src="/image/camera.svg", alt="photo")
-        .load
-          span Загрузить
-      h1= name
+      !=avatar
+      h1= display_name
       .profile-info.active
         .profile-info-list
           each elem in info
@@ -23,3 +20,6 @@ block content
 
       .profile-change-password
         !=formChangePassword
+
+  if isLoadAvatar 
+    !=loadAvatarModal

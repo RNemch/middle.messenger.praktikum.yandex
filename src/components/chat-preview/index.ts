@@ -2,10 +2,10 @@ import Block from '../../utils/block';
 import template from './index.pug';
 
 interface ChatPreviewProps {
-  id: string;
+  id: string | number;
   icon: string;
   name: string;
-  lastMessage: string;
+  lastMessage?: string;
   active?: 'active' | '';
   onClick?: any;
   events?: {

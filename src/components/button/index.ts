@@ -2,13 +2,15 @@ import Block from '../../utils/block';
 import template from './index.pug';
 
 interface ButtonProps {
-  tagButton?: 'button' | 'a';
+  tagButton?: 'button' | 'a' | 'img';
   type: 'submit' | 'button';
   name: string;
+  src?: string;
+  displayName?: string;
   className?: string;
-  onClick?: (event?: any) => void;
+  onClick?: (event?: Event) => void;
   events?: {
-    click: (event?: any) => void;
+    click: (event?: Event) => void;
   };
 }
 
