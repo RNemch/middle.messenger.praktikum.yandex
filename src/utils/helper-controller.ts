@@ -1,4 +1,4 @@
-import { Router } from './router';
+import { Router } from './router.ts';
 
 export const httpErrorHandling = (response: XMLHttpRequest) => {
   const router = new Router();
