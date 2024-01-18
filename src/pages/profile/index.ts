@@ -1,18 +1,18 @@
-import { Button } from '../../components/button';
-import { Info } from '../../components/info';
-import Block from '../../utils/block';
+import { Button } from '../../components/button/index.ts';
+import { Info } from '../../components/info/index.ts';
+import Block from '../../utils/block.ts';
 import template from './index.pug';
-import { data, passwords } from './const';
-import { Form } from '../../components/form';
-import { Input } from '../../components/input';
-import { addActive } from './script';
-import { Router } from '../../utils/router';
-import AuthController from '../../controllers/auth-controller';
-import { withStore } from '../../utils/store';
-import userController from '../../controllers/user-controller';
-import { Avatar } from '../../components/avatar';
-import { Modal } from '../../components/modal';
-import { InputFile } from '../../components/input-file';
+import { data, passwords } from './const.ts';
+import { Form } from '../../components/form/index.ts';
+import { Input } from '../../components/input/index.ts';
+import { addActive } from './script.ts';
+import { Router } from '../../utils/router.ts';
+import AuthController from '../../controllers/auth-controller.ts';
+import { withStore } from '../../utils/store.ts';
+import userController from '../../controllers/user-controller.ts';
+import { Avatar } from '../../components/avatar/index.ts';
+import { Modal } from '../../components/modal/index.ts';
+import { InputFile } from '../../components/input-file/index.ts';
 
 const router = new Router();
 

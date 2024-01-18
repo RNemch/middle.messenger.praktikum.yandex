@@ -1,6 +1,6 @@
-import Block from '../../utils/block';
-import { Eye } from '../eye-button';
-import { Input } from '../input';
+import Block from '../../utils/block.ts';
+import { Eye } from '../eye-button/index.ts';
+import { Input } from '../input/index.ts';
 import template from './index.pug';
 
 interface PasswordProps {
