@@ -12,7 +12,8 @@
     "lint:style": "npx stylelint ./src/**/*.less",
     "lint:script": "eslint ./ ./src/ --ext .ts",
     "lint:fix": "eslint ./ ./src/ --ext .ts --fix",
-    "test": "mocha"
+    "test": "mocha",
+    "prepare": "husky install"
   },
   "husky": {
     "hooks": {
@@ -38,7 +39,7 @@
     "esm-loader-css": "^1.0.6",
     "esm-loader-typescript": "^1.0.6",
     "esmock": "^2.6.2",
-    "husky": "^8.0.3",
+    "husky": "^8.0.0",
     "jsdom": "^23.2.0",
     "less": "^4.2.0",
     "mocha": "^10.2.0",
