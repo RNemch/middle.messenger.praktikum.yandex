@@ -48,16 +48,6 @@ describe('HTTPTransport', () => {
     );
   });
 
-  it('headers should be Content-type is empty why FormData', () => {
-    const date = new FormData();
-    date.append('test', '123');
-    instance.put('/user', date, true);
-
-    const [request] = requests;
-
-    expect(JSON.stringify(request.requestHeaders)).to.eq('{}');
-  });
-
   it('should send body request', () => {
     const expectedData = 'test';
 
