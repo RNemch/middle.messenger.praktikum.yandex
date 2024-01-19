@@ -1,7 +1,7 @@
-import AutthApi, { SignInData, SignUpData } from '../api/auth';
-import { httpErrorHandling } from '../utils/helper-controller';
-import { Router } from '../utils/router';
-import store from '../utils/store';
+import AutthApi, { SignInData, SignUpData } from '../api/auth.ts';
+import { httpErrorHandling } from '../utils/helper-controller.ts';
+import { Router } from '../utils/router.ts';
+import store from '../utils/store.ts';
 
 class AuthController {
   private api: AutthApi;

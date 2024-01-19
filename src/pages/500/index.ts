@@ -1,6 +1,6 @@
-import { Button } from '../../components/button';
-import Block from '../../utils/block';
-import { Router } from '../../utils/router';
+import { Button } from '../../components/button/index.ts';
+import Block from '../../utils/block.ts';
+import { Router } from '../../utils/router.ts';
 import template from './index.pug';
 
 export class Erorr500Page extends Block {

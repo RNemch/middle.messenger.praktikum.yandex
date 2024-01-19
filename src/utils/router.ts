@@ -1,10 +1,10 @@
-import AuthController from '../controllers/auth-controller';
-import chatsController from '../controllers/chats-controller';
-import Block from './block';
-import { Route } from './route';
+import AuthController from '../controllers/auth-controller.ts';
+import chatsController from '../controllers/chats-controller.ts';
+import Block from './block.ts';
+import { Route } from './route.ts';
 
 export class Router {
-  private static __instance: Router;
+  private static __instance?: Router;
 
   private _currentRoute: Route | null;
 
@@ -50,7 +50,7 @@ export class Router {
       return;
     }
 
-    if (this._currentRoute) {
+    if (this._currentRoute && this._currentRoute !== route) {
       this._currentRoute.leave();
     }
 
@@ -89,6 +89,12 @@ export class Router {
 
   forward() {
     this._history.forward();
+  }
+
+  reset() {
+    delete Router.__instance;
+
+    new Router(this._rootQuery);
   }
 
   getRoute(pathname: string) {

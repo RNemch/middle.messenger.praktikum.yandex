@@ -1,9 +1,9 @@
-import { Form } from '../../components/form';
-import { Toggle } from '../../components/toggle';
-import AuthController from '../../controllers/auth-controller';
-import Block from '../../utils/block';
-import { Router } from '../../utils/router';
-import { inputsRegistration, passwordsRegistration } from './const';
+import { Form } from '../../components/form/index.ts';
+import { Toggle } from '../../components/toggle/index.ts';
+import AuthController from '../../controllers/auth-controller.ts';
+import Block from '../../utils/block.ts';
+import { Router } from '../../utils/router.ts';
+import { inputsRegistration, passwordsRegistration } from './const.ts';
 import template from './index.pug';
 
 const router = new Router();

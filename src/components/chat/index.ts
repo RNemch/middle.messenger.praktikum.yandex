@@ -1,16 +1,16 @@
-import chatsController from '../../controllers/chats-controller';
-import userController from '../../controllers/user-controller';
-import controller from '../../controllers/messages-controller';
-import Block from '../../utils/block';
-import { User, withStore } from '../../utils/store';
-import { Button } from '../button';
-import { ChatPreview } from '../chat-preview';
-import { Form } from '../form';
-import { Input } from '../input';
-import { Modal } from '../modal';
+import chatsController from '../../controllers/chats-controller.ts';
+import userController from '../../controllers/user-controller.ts';
+import controller from '../../controllers/messages-controller.ts';
+import Block from '../../utils/block.ts';
+import { User, withStore } from '../../utils/store.ts';
+import { Button } from '../button/index.ts';
+import { ChatPreview } from '../chat-preview/index.ts';
+import { Form } from '../form/index.ts';
+import { Input } from '../input/index.ts';
+import { Modal } from '../modal/index.ts';
 import template from './index.pug';
-import { validation } from '../../utils/validation';
-import { InputFile } from '../input-file';
+import { validation } from '../../utils/validation.ts';
+import { InputFile } from '../input-file/index.ts';
 
 class Chat extends Block {
   constructor(props: any) {

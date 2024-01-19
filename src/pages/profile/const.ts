@@ -1,5 +1,5 @@
-import { Password } from '../../components/password';
-import { User } from '../../utils/store';
+import { Password } from '../../components/password/index.ts';
+import { User } from '../../utils/store.ts';
 
 interface Data {
   label: string;

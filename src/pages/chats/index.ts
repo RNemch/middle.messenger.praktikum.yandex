@@ -1,15 +1,15 @@
-import { Button } from '../../components/button';
-import Chat from '../../components/chat';
-import { ChatPreview } from '../../components/chat-preview';
-import { Form } from '../../components/form';
-import { Input } from '../../components/input';
-import { Modal } from '../../components/modal';
-import chatsController from '../../controllers/chats-controller';
-import controller from '../../controllers/messages-controller';
-import userController from '../../controllers/user-controller';
-import Block from '../../utils/block';
-import { Router } from '../../utils/router';
-import { ChatData, withStore } from '../../utils/store';
+import { Button } from '../../components/button/index.ts';
+import Chat from '../../components/chat/index.ts';
+import { ChatPreview } from '../../components/chat-preview/index.ts';
+import { Form } from '../../components/form/index.ts';
+import { Input } from '../../components/input/index.ts';
+import { Modal } from '../../components/modal/index.ts';
+import chatsController from '../../controllers/chats-controller.ts';
+import controller from '../../controllers/messages-controller.ts';
+import userController from '../../controllers/user-controller.ts';
+import Block from '../../utils/block.ts';
+import { Router } from '../../utils/router.ts';
+import { ChatData, withStore } from '../../utils/store.ts';
 import template from './index.pug';
 
 class ChatsPage extends Block {

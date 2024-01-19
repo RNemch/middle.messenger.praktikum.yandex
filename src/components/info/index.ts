@@ -1,5 +1,5 @@
-import Block from '../../utils/block';
-import store, { StoreEvents, User } from '../../utils/store';
+import Block from '../../utils/block.ts';
+import store, { StoreEvents, User } from '../../utils/store.ts';
 import template from './index.pug';
 
 interface InfoProps {
