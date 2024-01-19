@@ -5,14 +5,14 @@ import { fileURLToPath } from 'url';
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-const __filename = fileURLToPath(import.meta.url);
+const filename = fileURLToPath(import.meta.url);
 
-const __dirname = path.dirname(__filename);
+const dirname = path.dirname(filename);
 
-app.use(express.static(path.join(__dirname, 'dist')));
+app.use(express.static(path.join(dirname, 'dist')));
 
 app.get('/*', (req, res) => {
-  res.sendFile('index.html', { root: path.join(__dirname, 'dist') });
+  res.sendFile('index.html', { root: path.join(dirname, 'dist') });
 });
 
 app.listen(PORT, function () {
