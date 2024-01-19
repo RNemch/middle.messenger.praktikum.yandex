@@ -1,5 +1,5 @@
 import { PluginOption } from 'vite';
-const pug = require('pug');
+import pug from 'pug';
 
 export default function vitePluginPugPrecompile(): PluginOption {
   return {

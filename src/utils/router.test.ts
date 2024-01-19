@@ -49,4 +49,32 @@ describe('Router', () => {
       expect(getContentFake.callCount).to.eq(3);
     });
   });
+
+  describe('go', () => {
+    it('should instantiate class Block', () => {
+      const blockMock = {
+        destroy() {},
+      };
+      const blockFake = sinon.fake.returns(blockMock);
+      const router = new Router('app');
+      router.use('/', blockFake as any);
+
+      router.go('/');
+
+      expect(blockFake.called).to.be.true;
+    });
+
+    it('should change path in browser history', () => {
+      const blockMock = {
+        destroy() {},
+      };
+      const blockFake = sinon.fake.returns(blockMock);
+      const router = new Router('app');
+      router.use('/sign-up', blockFake as any);
+
+      router.go('/sign-up');
+
+      expect(window.location.pathname).to.eq('/sign-up');
+    });
+  });
 });

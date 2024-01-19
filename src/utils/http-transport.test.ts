@@ -1,0 +1,70 @@
+import { SinonFakeXMLHttpRequest, SinonFakeXMLHttpRequestStatic } from 'sinon';
+import { HTTPTransport } from './http-transport.ts';
+import sinon from 'sinon';
+import { expect } from 'chai';
+
+describe('HTTPTransport', () => {
+  let xhr: SinonFakeXMLHttpRequestStatic;
+  let instance: HTTPTransport;
+  let requests: SinonFakeXMLHttpRequest[] = [];
+
+  beforeEach(() => {
+    xhr = sinon.useFakeXMLHttpRequest();
+
+    xhr.onCreate = (request: SinonFakeXMLHttpRequest) => {
+      requests.push(request);
+    };
+
+    instance = new HTTPTransport('/auth');
+  });
+
+  afterEach(() => {
+    requests = [];
+  });
+
+  it('get should send GET request', () => {
+    instance.get('/user');
+
+    const [request] = requests;
+
+    expect(request.method).to.eq('GET');
+  });
+
+  it('post should send POST request', () => {
+    instance.post('/user', { test: '123' });
+
+    const [request] = requests;
+
+    expect(request.method).to.eq('POST');
+  });
+
+  it('headers should be Content-type whith application/json', () => {
+    instance.post('/user', { test: '123' });
+
+    const [request] = requests;
+
+    expect(JSON.stringify(request.requestHeaders['Content-Type'])).to.include(
+      'application/json',
+    );
+  });
+
+  it('headers should be Content-type is empty why FormData', () => {
+    const date = new FormData();
+    date.append('test', '123');
+    instance.put('/user', date, true);
+
+    const [request] = requests;
+
+    expect(JSON.stringify(request.requestHeaders)).to.eq('{}');
+  });
+
+  it('should send body request', () => {
+    const expectedData = 'test';
+
+    instance.post('/user', expectedData);
+
+    const [request] = requests;
+
+    expect(request.requestBody).to.eq(`"${expectedData}"`);
+  });
+});
