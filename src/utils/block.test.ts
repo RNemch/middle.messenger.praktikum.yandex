@@ -13,6 +13,7 @@ describe('Block', async () => {
     './event-bus': {
       EventBus: class {
         emit = eventBusMock.emit;
+
         on = eventBusMock.on;
       },
     },
@@ -22,6 +23,7 @@ describe('Block', async () => {
     getProps() {
       return this.props;
     }
+
     render() {
       return document.createDocumentFragment();
     }

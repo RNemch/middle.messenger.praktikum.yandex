@@ -61,7 +61,7 @@ describe('Router', () => {
 
       router.go('/');
 
-      expect(blockFake.called).to.be.true;
+      expect(blockFake.callCount).to.eq(1);
     });
 
     it('should change path in browser history', () => {

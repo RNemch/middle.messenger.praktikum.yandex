@@ -14,14 +14,7 @@
     "import/prefer-default-export": "off",
     "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
     "react/jsx-filename-extension": [0],
-    "import/extensions": [
-      "error",
-      "ignorePackages",
-      {
-        "js": "never",
-        "ts": "never"
-      }
-    ]
+    "import/extensions": ["error", "ignorePackages"]
   },
   "settings": {
     "import/resolver": {
