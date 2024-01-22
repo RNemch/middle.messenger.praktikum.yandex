@@ -1,6 +1,6 @@
-import Block from '../../utils/block';
-import store, { StoreEvents, User } from '../../utils/store';
-import { validation } from '../../utils/validation';
+import Block from '../../utils/block.ts';
+import store, { StoreEvents, User } from '../../utils/store.ts';
+import { validation } from '../../utils/validation.ts';
 import template from './index.pug';
 
 interface InputProps {

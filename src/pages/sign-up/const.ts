@@ -1,5 +1,5 @@
-import { Input } from '../../components/input';
-import { Password } from '../../components/password';
+import { Input } from '../../components/input/index.ts';
+import { Password } from '../../components/password/index.ts';
 
 export const inputsRegistration = [
   new Input({

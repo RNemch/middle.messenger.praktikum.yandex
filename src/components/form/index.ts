@@ -1,8 +1,8 @@
-import Block from '../../utils/block';
-import { validation } from '../../utils/validation';
-import { Button } from '../button';
-import { Input } from '../input';
-import { Password } from '../password';
+import Block from '../../utils/block.ts';
+import { validation } from '../../utils/validation.ts';
+import { Button } from '../button/index.ts';
+import { Input } from '../input/index.ts';
+import { Password } from '../password/index.ts';
 import template from './index.pug';
 
 interface FormProps {

@@ -2,7 +2,7 @@
 
 ## Яндекс Практикум Мессенджер
 
-Учебный проект мессенджера с использованием Vite, Pug, Less, Express, TypeScript
+Учебный проект мессенджера с использованием Vite, Pug, Less, Express, TypeScript, для тестов используется mocha, chai, sinon
 
 ## Макеты в Figma
 
@@ -26,4 +26,10 @@ npm run start
 ```
 npm install
 npm run dev
+```
+
+Запуск тестов
+
+```
+npm test
 ```
